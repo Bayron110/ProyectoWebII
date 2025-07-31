@@ -1,7 +1,9 @@
-/* styles.css o styles.scss */
 .carousel-container {
     position: relative;
     height: 700px;
     overflow: hidden;
     border-radius: 1rem;
+}
+.fondo{
+    background-color: blue;
 }

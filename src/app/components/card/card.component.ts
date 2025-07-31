@@ -94,7 +94,7 @@ export class CardComponent implements OnInit, OnDestroy {
   private intervalId: any;
 
   ngOnInit() {
-    this.intervalId = setInterval(() => this.nextSlide(), 3000); // Cambia cada 3 segundos
+    this.intervalId = setInterval(() => this.nextSlide(), 3000); 
   }
 
   ngOnDestroy() {

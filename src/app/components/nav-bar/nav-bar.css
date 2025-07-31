@@ -8,10 +8,10 @@
 }
 .barra{
   
-    background-color: rgba(255, 255, 255, 0.1); /* semi-transparente */
-    backdrop-filter: blur(10px); /* efecto difuminado */
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); 
 
 }
 .fondo{
-    background-color:#110594;
+    background-color:#1e3a8a;
 }

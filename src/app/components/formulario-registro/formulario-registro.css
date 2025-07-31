@@ -1,11 +1,48 @@
+/* Fondo con imagen y overlay */
+.page-wrapper {
+    position: relative;
+    min-height: 100vh;
+    padding: 2rem;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 25, 50, 0.45);
+    /* oscurece ligeramente para contraste */
+    pointer-events: none;
+}
+
+/* Grid: tarjetas - formulario - tarjetas */
+.content-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 500px) 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1300px;
+    z-index: 1;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .form-container {
+    width: 100%;
     max-width: 500px;
-    margin: 0 auto;
     padding: 2rem;
     background: #e0f2fe;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .input-group {
@@ -40,6 +77,7 @@
     outline: none;
     transition: border-color 0.3s;
     font-size: 1rem;
+    background: white;
 }
 
 .input-icon input:focus {
@@ -69,7 +107,7 @@
 }
 
 .btn-primary:hover {
-    background-color: #2678c9f0;
+    filter: brightness(1.05);
 }
 
 .btn-secondary {
@@ -78,7 +116,7 @@
 }
 
 .btn-secondary:hover {
-    background-color: #4b5563;
+    filter: brightness(1.1);
 }
 
 .btn-outline {
@@ -91,6 +129,106 @@
     background-color: #eef2ff;
 }
 
-.fondo{
-    background-color:white;
+/* Tarjetas flip (publicidad) */
+.side-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+
+
+.flip-card {
+    width: 220px;
+    height: 260px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+}
+
+.flip-card .inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.flip-card.flipped .inner {
+    transform: rotateY(180deg);
+}
+
+.front,
+.back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.front {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+.front .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.front .hint {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+.back {
+    background: linear-gradient(135deg, #10b981, #3b82f6);
+    transform: rotateY(180deg);
+}
+
+.back h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.back ul {
+    padding-left: 1rem;
+    margin: 0;
+    text-align: left;
+    list-style: disc;
+    flex-grow: 1;
+}
+
+.back .small {
+    font-size: 0.65rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .side-cards {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .flip-card {
+        margin: 0.5rem;
+    }
 }

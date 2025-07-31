@@ -1,0 +1,119 @@
+<!-- nosotros.component.html -->
+<div class="nosotros-container">
+
+    <!-- Header Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Policía Nacional del Ecuador</h1>
+            <p class="hero-subtitle">Comprometidos con la seguridad y el bienestar de todos los ecuatorianos</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://i.postimg.cc/L6yjHHmG/logo.png">
+        </div>
+    </section>
+
+    <!-- Misión Section -->
+    <section class="section mision-section">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-bullseye section-icon"></i>
+                <h2 class="section-title">Nuestra Misión</h2>
+            </div>
+            <div class="mission-content">
+                <p class="mission-text">
+                    Garantizar la seguridad ciudadana y el orden público a través de la prevención, investigación y
+                    represión del delito, protegiendo los derechos y libertades de las personas, manteniendo la paz
+                    social y contribuyendo al fortalecimiento del Estado de Derecho en el territorio nacional.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visión Section -->
+    <section class="section vision-section">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-eye section-icon"></i>
+                <h2 class="section-title">Nuestra Visión</h2>
+            </div>
+            <div class="vision-content">
+                <p class="vision-text">
+                    Ser una institución policial moderna, profesional, eficiente y transparente, reconocida por su
+                    excelencia en el servicio, que cuente con la confianza y respaldo de la ciudadanía, contribuyendo
+                    efectivamente a la construcción de una sociedad más segura, justa y en paz.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objetivo Section -->
+    <section class="section objetivo-section">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-target section-icon"></i>
+                <h2 class="section-title">Nuestro Objetivo</h2>
+            </div>
+            <div class="objetivo-content">
+                <p class="objetivo-text">
+                    Consolidar una policía nacional que responda efectivamente a las necesidades de seguridad de la
+                    población, mediante la implementación de estrategias integrales de prevención, el fortalecimiento
+                    de capacidades institucionales, la modernización tecnológica y el trabajo conjunto con la comunidad,
+                    garantizando el respeto a los derechos humanos y la aplicación de la justicia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores Section -->
+    <section class="section valores-section">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-gem section-icon"></i>
+                <h2 class="section-title">Nuestros Valores</h2>
+            </div>
+            <div class="valores-grid">
+                <div class="valor-card" *ngFor="let valor of valores">
+                    <div class="valor-icon">
+                        <img [src]="valor.icono" alt="Icono del valor">
+                    </div>
+                    <h3 class="valor-titulo">{{valor.titulo}}</h3>
+                    <p class="valor-descripcion">{{valor.descripcion}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section class="section servicios-section">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-cogs section-icon"></i>
+                <h2 class="section-title">Nuestros Servicios</h2>
+            </div>
+            <div class="servicios-grid">
+                <div class="servicio-card" *ngFor="let servicio of servicios">
+                    <div class="servicio-icon">
+                        <img [src]="servicio.icon" alt="Icon servicio" >
+                    </div>
+                    <h3 class="servicio-titulo">{{servicio.titulo}}</h3>
+                    <p class="servicio-descripcion">{{servicio.descripcion}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">¿Necesitas nuestra ayuda?</h2>
+                <p class="cta-subtitle">Estamos aquí para servir y proteger a la comunidad</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary">Emergencias: 911</button>
+                    <button class="btn btn-secondary">Contactar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

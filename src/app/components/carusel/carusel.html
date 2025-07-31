@@ -1,39 +1,26 @@
-
-<div  class="relative w-full max-w-screen-lg mx-auto rounded-xl shadow-md overflow-hidden"
-    data-carousel="static">
-    <!-- Carousel wrapper -->
+<div class="fondo">
+<div class="relative w-full max-w-screen-lg mx-auto rounded-xl shadow-md overflow-hidden" data-carousel="slide">
     <div class="carousel-container">
-        <!-- Imagen 1 -->
-        <div class="hidden duration-500 ease-in-out" data-carousel-item>
+        <div class="duration-500 ease-in-out" data-carousel-item="active">
             <img src="https://images.pexels.com/photos/10466472/pexels-photo-10466472.jpeg"
                 class="absolute block w-full h-full object-cover rounded-xl brightness-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 alt="Imagen 1" />
         </div>
-
-        <!-- Imagen 2 -->
         <div class="hidden duration-500 ease-in-out" data-carousel-item>
-            <div class="">
             <img src="https://images.pexels.com/photos/7715253/pexels-photo-7715253.jpeg"
                 class="absolute block w-full h-full object-cover rounded-xl sepia top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 alt="Imagen 2" />
-                </div>
         </div>
-
-        <!-- Imagen 3 (activa) -->
         <div class="hidden duration-500 ease-in-out" data-carousel-item>
             <img src="https://images.pexels.com/photos/10464480/pexels-photo-10464480.jpeg"
                 class="absolute block w-full h-full object-cover rounded-xl grayscale top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 alt="Imagen 3" />
         </div>
-
-        <!-- Imagen 4 -->
         <div class="hidden duration-500 ease-in-out" data-carousel-item>
             <img src="https://images.pexels.com/photos/6065141/pexels-photo-6065141.jpeg"
                 class="absolute block w-full h-full object-cover rounded-xl contrast-125 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 alt="Imagen 4" />
         </div>
-
-        <!-- Imagen 5 -->
         <div class="hidden duration-500 ease-in-out" data-carousel-item>
             <img src="https://images.pexels.com/photos/7715239/pexels-photo-7715239.jpeg"
                 class="absolute block w-full h-full object-cover rounded-xl hue-rotate-15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -41,18 +28,16 @@
         </div>
     </div>
 
-    <!-- Slider controls -->
     <button type="button"
         class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         data-carousel-prev>
         <span
             class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M5 1 1 5l4 4" />
             </svg>
-            <span class="sr-only">Anterior</span>
         </span>
     </button>
 
@@ -61,12 +46,23 @@
         data-carousel-next>
         <span
             class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="m1 9 4-4-4-4" />
             </svg>
-            <span class="sr-only">Siguiente</span>
         </span>
     </button>
+</div>
+
+<script>
+    const items = document.querySelectorAll('[data-carousel-item]');
+    let index = 0;
+
+    setInterval(() => {
+        items[index].classList.add('hidden');
+        index = (index + 1) % items.length;
+        items[index].classList.remove('hidden');
+    }, 4000); // Cambia de imagen cada 4 segundos
+</script>
 </div>
