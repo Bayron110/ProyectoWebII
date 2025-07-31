@@ -1,32 +1,46 @@
-<div id="animation-carousel" class="relative w-full" data-carousel="static">
+<br>
+<div  class="relative w-full max-w-screen-lg mx-auto rounded-xl shadow-md overflow-hidden"
+    data-carousel="static">
     <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-        <!-- Item 1 -->
-        <div class="hidden duration-200 ease-linear" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-1.svg"
-                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+    <div class="carousel-container">
+        <!-- Imagen 1 -->
+        <div class="hidden duration-500 ease-in-out" data-carousel-item>
+            <img src="https://images.pexels.com/photos/10466472/pexels-photo-10466472.jpeg"
+                class="absolute block w-full h-full object-cover rounded-xl brightness-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                alt="Imagen 1" />
         </div>
-        <!-- Item 2 -->
-        <div class="hidden duration-200 ease-linear" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-2.svg"
-                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+
+        <!-- Imagen 2 -->
+        <div class="hidden duration-500 ease-in-out" data-carousel-item>
+            <div class="">
+            <img src="https://images.pexels.com/photos/7715253/pexels-photo-7715253.jpeg"
+                class="absolute block w-full h-full object-cover rounded-xl sepia top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                alt="Imagen 2" />
+                </div>
         </div>
-        <!-- Item 3 -->
-        <div class="hidden duration-200 ease-linear" data-carousel-item="active">
-            <img src="/docs/images/carousel/carousel-3.svg"
-                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+
+        <!-- Imagen 3 (activa) -->
+        <div class="hidden duration-500 ease-in-out" data-carousel-item>
+            <img src="https://images.pexels.com/photos/10464480/pexels-photo-10464480.jpeg"
+                class="absolute block w-full h-full object-cover rounded-xl grayscale top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                alt="Imagen 3" />
         </div>
-        <!-- Item 4 -->
-        <div class="hidden duration-200 ease-linear" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-4.svg"
-                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+
+        <!-- Imagen 4 -->
+        <div class="hidden duration-500 ease-in-out" data-carousel-item>
+            <img src="https://images.pexels.com/photos/6065141/pexels-photo-6065141.jpeg"
+                class="absolute block w-full h-full object-cover rounded-xl contrast-125 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                alt="Imagen 4" />
         </div>
-        <!-- Item 5 -->
-        <div class="hidden duration-200 ease-linear" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-5.svg"
-                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+
+        <!-- Imagen 5 -->
+        <div class="hidden duration-500 ease-in-out" data-carousel-item>
+            <img src="https://images.pexels.com/photos/7715239/pexels-photo-7715239.jpeg"
+                class="absolute block w-full h-full object-cover rounded-xl hue-rotate-15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                alt="Imagen 5" />
         </div>
     </div>
+
     <!-- Slider controls -->
     <button type="button"
         class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
@@ -38,9 +52,10 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M5 1 1 5l4 4" />
             </svg>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">Anterior</span>
         </span>
     </button>
+
     <button type="button"
         class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         data-carousel-next>
@@ -51,7 +66,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="m1 9 4-4-4-4" />
             </svg>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">Siguiente</span>
         </span>
     </button>
 </div>
