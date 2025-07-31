@@ -64,12 +64,12 @@
 }
 
 .btn-primary {
-    background-color: #4f46e5;
+    background-color: #2678c9f0;
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #4338ca;
+    background-color: #2678c9f0;
 }
 
 .btn-secondary {
@@ -83,8 +83,8 @@
 
 .btn-outline {
     background-color: transparent;
-    border: 2px solid #4f46e5;
-    color: #4f46e5;
+    border: 2px solid #5599ddf0;
+    color: #5599ddf0;
 }
 
 .btn-outline:hover {
@@ -92,5 +92,5 @@
 }
 
 .fondo{
-    background-color: aquamarine;
+    background-color:white;
 }

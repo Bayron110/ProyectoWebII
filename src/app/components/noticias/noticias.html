@@ -1,46 +1,88 @@
-<br>
-<div>
-    <p class="seccion-titulo">Lo último en Noticias</p>
-</div>
+<section class="video-section">
+    <video class="video-fondo" autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/pl1.mp4" type="video/mp4" />
+        Tu navegador no soporta la reproducción de video.
+    </video>
 
-<div class="imagen-superior">
-    <img src="assets/imagen-policia.jpg" alt="Imagen principal" class="imagen-header">
-</div>
+    <div class="contenido-superpuesto">
+        <header class="mb-6">
+            <h2 class="text-4xl font-bold seccion-titulo">Lo último en Noticias</h2>
+        </header>
 
-<div class="tarjetas-container">
-    <div class="tarjeta">
-        <img src="assets/noticia1.jpg" alt="Noticia 1" class="imagen-tarjeta">
-        <h3 class="titulo">Incautación de drogas en operativo nocturno</h3>
-        <p class="descripcion">La policía decomisó más de 200kg de sustancias ilícitas en un operativo en la zona norte.</p>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 tarjetas-container">
+            <!-- Tarjeta 1 -->
+            <article class="tarjeta bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+                <figure>
+                    <img src="https://images.pexels.com/photos/10480637/pexels-photo-10480637.jpeg"
+                        alt="Operativo policial nocturno" class="imagen-tarjeta rounded-md mb-3" loading="lazy" />
+                </figure>
+                <div class="contenido-tarjeta">
+                    <h3 class="text-xl font-semibold">Incautación de drogas en operativo nocturno</h3>
+                    <p>La policía decomisó más de 200 kg de sustancias ilícitas en un operativo en la zona norte.</p>
+                </div>
+            </article>
+
+            <!-- Tarjeta 2 -->
+            <article class="tarjeta bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+                <figure>
+                    <img src="https://images.pexels.com/photos/10466273/pexels-photo-10466273.jpeg"
+                        alt="Presentación de equipo táctico" class="imagen-tarjeta rounded-md mb-3" loading="lazy" />
+                </figure>
+                <div class="contenido-tarjeta">
+                    <h3 class="text-xl font-semibold">Nuevo equipo táctico se suma a la fuerza</h3>
+                    <p>Se presentó una nueva unidad de intervención rápida equipada con tecnología de punta.</p>
+                </div>
+            </article>
+
+            <!-- Tarjeta 3 -->
+            <article class="tarjeta bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+                <figure>
+                    <img src="https://images.pexels.com/photos/25649836/pexels-photo-25649836.jpeg"
+                        alt="Rescate en edificio colapsado" class="imagen-tarjeta rounded-md mb-3" loading="lazy" />
+                </figure>
+                <div class="contenido-tarjeta">
+                    <h3 class="text-xl font-semibold">Rescate en edificio colapsado</h3>
+                    <p>Oficiales rescataron a tres personas tras el colapso de un edificio en el centro.</p>
+                </div>
+            </article>
+
+            <!-- Tarjeta 4 -->
+            <article class="tarjeta bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+                <figure>
+                    <img src="https://images.pexels.com/photos/7715187/pexels-photo-7715187.jpeg"
+                        alt="Detención de banda de robo de vehículos" class="imagen-tarjeta rounded-md mb-3"
+                        loading="lazy" />
+                </figure>
+                <div class="contenido-tarjeta">
+                    <h3 class="text-xl font-semibold">Capturan a banda dedicada al robo de vehículos</h3>
+                    <p>Tras meses de investigación, se logró la detención de los implicados en múltiples robos.</p>
+                </div>
+            </article>
+
+            <!-- Tarjeta 5 -->
+            <article class="tarjeta bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+                <figure>
+                    <img src="https://images.pexels.com/photos/2450439/pexels-photo-2450439.jpeg"
+                        alt="Agentes en capacitación internacional" class="imagen-tarjeta rounded-md mb-3"
+                        loading="lazy" />
+                </figure>
+                <div class="contenido-tarjeta">
+                    <h3 class="text-xl font-semibold">Capacitación internacional para agentes</h3>
+                    <p>Más de 100 policías recibieron formación en técnicas de intervención de alta complejidad.</p>
+                </div>
+            </article>
+
+            <!-- Tarjeta 6 -->
+            <article class="tarjeta bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+                <figure>
+                    <img src="https://images.pexels.com/photos/7714852/pexels-photo-7714852.jpeg"
+                        alt="Actividad de policía comunitaria" class="imagen-tarjeta rounded-md mb-3" loading="lazy" />
+                </figure>
+                <div class="contenido-tarjeta">
+                    <h3 class="text-xl font-semibold">Policía comunitaria fortalece lazos</h3>
+                    <p>Iniciativas sociales buscan mejorar la relación con los ciudadanos.</p>
+                </div>
+            </article>
+        </div>
     </div>
-
-    <div class="tarjeta">
-        <img src="assets/noticia2.jpg" alt="Noticia 2" class="imagen-tarjeta">
-        <h3 class="titulo">Nuevo equipo táctico se suma a la fuerza</h3>
-        <p class="descripcion">Se presentó una nueva unidad de intervención rápida equipada con tecnología de punta.</p>
-    </div>
-
-    <div class="tarjeta">
-        <img src="assets/noticia3.jpg" alt="Noticia 3" class="imagen-tarjeta">
-        <h3 class="titulo">Rescate en edificio colapsado</h3>
-        <p class="descripcion">Oficiales rescataron a tres personas tras el colapso de un edificio en el centro.</p>
-    </div>
-
-    <div class="tarjeta">
-        <img src="assets/noticia4.jpg" alt="Noticia 4" class="imagen-tarjeta">
-        <h3 class="titulo">Capturan a banda dedicada al robo de vehículos</h3>
-        <p class="descripcion">Tras varios meses de investigación, se logró la detención de los implicados en múltiples robos.</p>
-    </div>
-
-    <div class="tarjeta">
-        <img src="assets/noticia5.jpg" alt="Noticia 5" class="imagen-tarjeta">
-        <h3 class="titulo">Capacitación internacional para agentes</h3>
-        <p class="descripcion">Más de 100 policías recibieron formación en técnicas de intervención de alta complejidad.</p>
-    </div>
-
-    <div class="tarjeta">
-        <img src="assets/noticia6.jpg" alt="Noticia 6" class="imagen-tarjeta">
-        <h3 class="titulo">Policía comunitaria fortalece lazos</h3>
-        <p class="descripcion">Iniciativas de proximidad y programas sociales buscan mejorar la relación con los ciudadanos.</p>
-    </div>
-</div>
+</section>

@@ -2,7 +2,7 @@
     font-size: 1.8rem;
     font-weight: bold;
     text-align: center;
-    color: #0d3b66;
+    color: white;
     margin-bottom: 10px;
 }
 
@@ -59,4 +59,200 @@
     font-size: 0.95rem;
     margin: 0 15px 15px 15px;
     line-height: 1.5;
+}
+
+/* animación de aparición con stagger */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* brillo sutil al hacer hover */
+@keyframes shine {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* aplicar stagger usando nth-child */
+.tarjeta {
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
+    animation-delay: 0.1s;
+    will-change: transform, opacity;
+}
+
+/* escalonar aparición: cada 1/10 más tarde */
+.tarjeta:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.tarjeta:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.tarjeta:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.tarjeta:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.tarjeta:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.tarjeta:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* hover mejorado: elevar y brillo */
+.tarjeta {
+    transition: background-color 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tarjeta:hover,
+.tarjeta:focus-within {
+    background-color: #74b9ff;
+    color: #000;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* efecto de brillo rápido en hover (solo como overlay sutil) */
+.tarjeta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 10px;
+}
+
+.tarjeta:hover::after {
+    opacity: 1;
+    animation: shine 1s linear;
+}
+
+/* pequeña elevación activa */
+.tarjeta:active {
+    transform: translateY(-2px);
+}
+
+/* reducir animaciones si el usuario las desactiva */
+@media (prefers-reduced-motion: reduce) {
+    .tarjeta {
+        animation: none;
+        transition: background-color 0.2s ease;
+    }
+
+    .tarjeta:hover {
+        transform: none;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .tarjeta::after {
+        display: none;
+    }
+}
+
+/* Contenedor principal con video de fondo */
+.video-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 2rem 1rem;
+    background: #000;
+    /* fondo negro para evitar parpadeos */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Video en posición absoluta, cubriendo toda el área */
+.video-fondo {
+    position: absolute;
+    inset: 0;
+    /* top:0; right:0; bottom:0; left:0; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    filter: brightness(0.65);
+}
+
+/* Contenido encima del video */
+.contenido-superpuesto {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    color: white;
+}
+
+/* Título sección */
+.seccion-titulo {
+    margin-bottom: 1rem;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+}
+
+/* Grid responsivo para tarjetas */
+.tarjetas-container {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Estilo de cada tarjeta */
+.tarjeta {
+    background: rgba(255 255 255 / 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/* Imagen de la tarjeta */
+.imagen-tarjeta {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+/* Contenido texto tarjeta */
+.contenido-tarjeta h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.contenido-tarjeta p {
+    font-size: 1rem;
+    line-height: 1.3;
 }

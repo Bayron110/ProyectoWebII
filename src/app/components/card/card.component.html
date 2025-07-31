@@ -1,0 +1,43 @@
+<div class="capturados-section">
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="assets/video/pl2.mp4" type="video/mp4">
+            Tu navegador no soporta el video.
+        </video>
+    </div>
+    <div class="header">
+        <h1 class="title">LOS MÁS BUSCADOS</h1>
+        <div class="police-background">ECUADOR</div>
+    </div>
+
+    <!-- 🎞️ Carrusel -->
+    <div class="carousel-container">
+        <div class="carousel-wrapper" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+            <div class="slide" *ngFor="let capturado of capturados; let i = index">
+                <div class="card" [class.destacado]="capturado.destacado">
+                    <div class="card-header">
+                        <img [src]="capturado.foto" [alt]="capturado.nombre + ' ' + capturado.apellido" class="photo">
+                        <div class="quote-icon"></div>
+                        <div class="capturado-stamp" *ngIf="capturado.destacado">CAPTURADO</div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="name">{{ capturado.nombre }} {{ capturado.apellido }}</h3>
+                        <p class="fenix">{{ capturado.fenix }}</p>
+                        <p class="description">{{ capturado.descripcion }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="nav-button prev" (click)="previousSlide()">‹</button>
+        <button class="nav-button next" (click)="nextSlide()">›</button>
+    </div>
+
+    <!-- 🔘 Indicadores -->
+    <div class="indicators">
+        <button *ngFor="let capturado of capturados; let i = index" class="indicator"
+            [class.active]="i === currentIndex" (click)="goToSlide(i)">
+        </button>
+    </div>
+</div>

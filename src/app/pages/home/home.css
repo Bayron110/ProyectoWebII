@@ -1,0 +1,23 @@
+.contenedor-video {
+  position: relative;
+  width: 100%;
+  height: 100vh; 
+  overflow: hidden;
+}
+
+
+video.fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  z-index: 0;
+}
+
+
+.contenido-superpuesto {
+  position: relative;
+  z-index: 10;
+}
