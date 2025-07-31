@@ -3,7 +3,7 @@ import { FormularioRegistro } from "../../components/formulario-registro/formula
 
 @Component({
   selector: 'app-registro',
-  imports: [Registro, FormularioRegistro],
+  imports: [FormularioRegistro],
   templateUrl: './registro.html',
   styleUrl: './registro.css'
 })
