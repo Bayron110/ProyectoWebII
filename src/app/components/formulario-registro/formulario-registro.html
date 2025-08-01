@@ -1,4 +1,4 @@
-<div class="page-wrapper" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}">
+<div class="page-wrapper" [ngStyle]="{ 'background-image': 'url(' + backgroundImageUrl + ')' }">
     <div class="overlay"></div>
 
     <div class="content-grid">
@@ -29,12 +29,16 @@
 
         <!-- Formulario central -->
         <div class="form-wrapper">
-            <form class="form-container" (submit)="submitForm($event)" novalidate>
+            <form #formulario="ngForm" (ngSubmit)="agregarUsuario(formulario)" class="form-container" novalidate>
                 <div class="input-group">
                     <label for="nombre">Nombre *</label>
                     <div class="input-icon">
                         <span><i class="fas fa-user"></i></span>
-                        <input type="text" id="nombre" placeholder="Ingrese su nombre" required />
+                        <input [(ngModel)]="nombre" name="nombre" type="text" id="nombre"
+                            placeholder="Ingrese su nombre" required #n="ngModel" aria-required="true" />
+                    </div>
+                    <div class="error" *ngIf="n.invalid && (n.dirty || n.touched)">
+                        <small>Nombre es obligatorio.</small>
                     </div>
                 </div>
 
@@ -42,7 +46,11 @@
                     <label for="apellido">Apellido *</label>
                     <div class="input-icon">
                         <span><i class="fas fa-user-tag"></i></span>
-                        <input type="text" id="apellido" placeholder="Ingrese su apellido" required />
+                        <input [(ngModel)]="apellido" name="apellido" type="text" id="apellido"
+                            placeholder="Ingrese su apellido" required #a="ngModel" aria-required="true" />
+                    </div>
+                    <div class="error" *ngIf="a.invalid && (a.dirty || a.touched)">
+                        <small>Apellido es obligatorio.</small>
                     </div>
                 </div>
 
@@ -50,7 +58,11 @@
                     <label for="cedula">Cédula *</label>
                     <div class="input-icon">
                         <span><i class="fas fa-id-card"></i></span>
-                        <input type="text" id="cedula" placeholder="Ingrese su cédula" required />
+                        <input [(ngModel)]="cedula" name="cedula" type="text" id="cedula"
+                            placeholder="Ingrese su cédula" required #c="ngModel" aria-required="true" />
+                    </div>
+                    <div class="error" *ngIf="c.invalid && (c.dirty || c.touched)">
+                        <small>Cédula es obligatoria.</small>
                     </div>
                 </div>
 
@@ -58,7 +70,11 @@
                     <label for="direccion">Dirección *</label>
                     <div class="input-icon">
                         <span><i class="fas fa-map-marker-alt"></i></span>
-                        <input type="text" id="direccion" placeholder="Ingrese su dirección" required />
+                        <input [(ngModel)]="direccion" name="direccion" type="text" id="direccion"
+                            placeholder="Ingrese su dirección" required #d="ngModel" aria-required="true" />
+                    </div>
+                    <div class="error" *ngIf="d.invalid && (d.dirty || d.touched)">
+                        <small>Dirección es obligatoria.</small>
                     </div>
                 </div>
 
@@ -66,7 +82,12 @@
                     <label for="email">Correo Electrónico *</label>
                     <div class="input-icon">
                         <span><i class="fas fa-envelope"></i></span>
-                        <input type="email" id="email" placeholder="Ingrese su correo" required />
+                        <input [(ngModel)]="email" name="email" type="email" id="email" placeholder="Ingrese su correo"
+                            required email #e="ngModel" aria-required="true" />
+                    </div>
+                    <div class="error" *ngIf="e.invalid && (e.dirty || e.touched)">
+                        <small *ngIf="e.errors?.['required']">Email es obligatorio.</small>
+                        <small *ngIf="e.errors?.['email']">Formato de email inválido.</small>
                     </div>
                 </div>
 
@@ -74,19 +95,27 @@
                     <label for="password">Contraseña *</label>
                     <div class="input-icon">
                         <span><i class="fas fa-lock"></i></span>
-                        <input type="password" id="password" placeholder="Ingrese su contraseña" required />
+                        <input [(ngModel)]="password" name="password" type="password" id="password"
+                            placeholder="Ingrese su contraseña" required #p="ngModel" aria-required="true" />
+                    </div>
+                    <div class="error" *ngIf="p.invalid && (p.dirty || p.touched)">
+                        <small>Contraseña es obligatoria.</small>
                     </div>
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
-                    <button type="button" class="btn btn-secondary">Iniciar Sesión</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid || loading">
+                        {{ loading ? "Guardando..." : "Registrarse" }}
+                    </button>
+                    <button type="button" class="btn btn-secondary">
+                        Iniciar Sesión
+                    </button>
                     <button type="button" class="btn btn-outline">Volver a Home</button>
                 </div>
             </form>
         </div>
 
-        <!-- Tarjetas derecha (simetría opcional) -->
+        <!-- Tarjetas derecha -->
         <div class="side-cards right">
             <div class="flip-card" *ngFor="let card of cards" (click)="toggleFlip(card)" [class.flipped]="card.flipped"
                 [attr.aria-label]="card.title" role="button" tabindex="0" (keydown.enter)="toggleFlip(card)">
@@ -109,6 +138,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal de feedback -->
+    <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()" aria-hidden="true"></div>
+    <div class="modal" *ngIf="showModal" role="alertdialog" aria-modal="true" [attr.aria-label]="modalTitle">
+        <div class="modal-content">
+            <h2>{{ modalTitle }}</h2>
+            <p>{{ modalMessage }}</p>
+            <button class="btn btn-primary" (click)="closeModal()">Aceptar</button>
         </div>
     </div>
 </div>

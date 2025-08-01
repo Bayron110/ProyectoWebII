@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .overlay {
@@ -138,8 +138,6 @@
     padding: 0.5rem;
 }
 
-
-
 .flip-card {
     width: 220px;
     height: 260px;
@@ -231,4 +229,41 @@
     .flip-card {
         margin: 0.5rem;
     }
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 360px;
+    z-index: 101;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content p {
+    margin: 0.75rem 0 1.25rem;
+}
+
+.modal-content button {
+    cursor: pointer;
+}
+
+.error small {
+    color: #d9534f;
 }

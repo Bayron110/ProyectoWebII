@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Registro } from '../../service/registro';
+import { FormsModule, NgForm } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 
 interface FlipCard {
   title: string;
@@ -9,14 +12,16 @@ interface FlipCard {
   backContent: string[];
   flipped: boolean;
 }
+
 @Component({
   selector: 'app-formulario-registro',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './formulario-registro.html',
-  styleUrl: './formulario-registro.css'
+  styleUrls: ['./formulario-registro.css']
 })
 export class FormularioRegistro {
-backgroundImageUrl = 'https://via.placeholder.com/1600x900'; // reemplaza con tu URL dinámica si quieres
+  backgroundImageUrl = 'https://via.placeholder.com/1600x900';
 
   cards: FlipCard[] = [
     {
@@ -47,13 +52,65 @@ backgroundImageUrl = 'https://via.placeholder.com/1600x900'; // reemplaza con tu
     }
   ];
 
+  nombre = '';
+  apellido = '';
+  cedula: string = '';
+  direccion = '';
+  email = '';
+  password = '';
+
+  showModal = false;
+  modalTitle = '';
+  modalMessage = '';
+  modalType: 'success' | 'error' = 'success';
+  loading = false;
+
+  constructor(private usuarioServicio: Registro) {}
+
   toggleFlip(card: FlipCard) {
     card.flipped = !card.flipped;
   }
 
-  submitForm(event: Event) {
-    event.preventDefault();
-    // lógica de envío (por ejemplo, validaciones y llamada a servicio)
-    console.log('Formulario enviado');
+  agregarUsuario(formulario: NgForm) {
+    if (formulario.invalid) {
+      Object.values(formulario.controls).forEach(ctrl => ctrl.markAsTouched());
+      return;
+    }
+
+    this.loading = true;
+
+    const payload = {
+      nombre: this.nombre,
+      apellido: this.apellido,
+      cedula: this.cedula,
+      direccion: this.direccion,
+      email: this.email,
+      password: this.password
+    };
+
+    this.usuarioServicio.guardarUsuario(payload)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (res: any) => {
+          this.modalType = 'success';
+          this.modalTitle = 'Éxito';
+          this.modalMessage = 'El usuario se guardó correctamente.';
+          this.showModal = true;
+          formulario.resetForm();
+          setTimeout(() => this.closeModal(), 3000);
+        },
+        error: (err: any) => {
+          console.error('Error al guardar usuario', err);
+          this.modalType = 'error';
+          this.modalTitle = 'Error';
+          const backendMsg = err?.error?.mensaje || err?.message;
+          this.modalMessage = backendMsg || 'Hubo un error al guardar el usuario. Intenta de nuevo.';
+          this.showModal = true;
+        }
+      });
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }
