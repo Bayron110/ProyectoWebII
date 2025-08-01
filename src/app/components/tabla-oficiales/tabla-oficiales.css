@@ -1,0 +1,172 @@
+/* Variables para facilidad */
+:root {
+  --focus-color: #38bdf8;
+  --bg-hover: rgba(56, 189, 248, 0.08);
+  --radius: 0.75rem;
+  --shadow-soft: 0 10px 25px -10px rgba(0, 0, 0, 0.08);
+}
+
+/* Entrada */
+input[type="text"] {
+  width: 100%;
+  transition: border-color .25s ease, box-shadow .25s ease, transform .2s ease;
+  border: 1px solid #d1d5db;
+  border-radius: .5rem;
+  background: #fff;
+  padding: .75rem 1rem;
+  font-size: .9rem;
+  line-height: 1.2;
+  appearance: none;
+}
+
+input[type="text"]::placeholder {
+  color: #9ca3af;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--focus-color);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Suavizado en foco/hover */
+input[type="text"]:hover {
+  filter: brightness(1.03);
+}
+
+/* Tabla */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  animation: fadeIn 0.5s ease-out both;
+}
+
+/* Encabezado */
+thead {
+  background: #f9fafb;
+}
+
+th {
+  position: relative;
+  padding: .75rem 1rem;
+  font-size: .65rem;
+  letter-spacing: .08em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* Filas y celdas */
+td {
+  padding: .75rem 1rem;
+  vertical-align: middle;
+  background: #fff;
+  font-size: .9rem;
+  color: #4b5563;
+  transition: background .25s ease;
+}
+
+/* Hover de fila con efecto deslizante */
+tbody tr {
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: transform .2s ease;
+}
+
+tbody tr:hover {
+  background: var(--bg-hover);
+  transform: translateY(-1px);
+}
+
+tbody tr::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(56, 189, 248, 0.08);
+  transition: width .35s ease;
+  pointer-events: none;
+}
+
+tbody tr:hover::before {
+  width: 100%;
+}
+
+/* Imagen */
+img {
+  transition: transform .35s cubic-bezier(.25,.8,.25,1), filter .25s ease;
+  border-radius: .5rem;
+  display: block;
+  max-height: 64px;
+  object-fit: contain;
+  background: #f3f4f6;
+}
+
+img:hover {
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+/* Placeholder de "no resultados" */
+tbody tr td[colspan] {
+  font-style: normal;
+  background: #f1f5f9;
+  color: #6b7280;
+}
+
+/* Sombra general para contenedor */
+.relative.overflow-x-auto {
+  border-radius: .75rem;
+  box-shadow: var(--shadow-soft);
+  background: white;
+  overflow: hidden;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación sutil para inputs al cargar */
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+input[type="text"] {
+  animation: pop .4s ease-out both;
+}
+
+/* Respecto a usuarios con preferencia por reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  tbody tr:hover {
+    transform: none;
+    background: rgba(56, 189, 248, 0.05);
+  }
+  img:hover {
+    transform: none;
+  }
+}
