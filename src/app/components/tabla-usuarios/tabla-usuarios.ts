@@ -25,17 +25,14 @@ export class TablaUsuarios implements OnInit {
   usuarios: UsuarioConId[] = [];
   loading = false;
 
-  // Para edición en línea: trackea cuál está en edición y su copia temporal
   editId: string | null = null;
   editBuffer: Partial<UsuarioConId> = {};
 
-  // Modal de feedback
   showModal = false;
   modalTitle = '';
   modalMessage = '';
   modalType: 'success' | 'error' = 'success';
 
-  // Confirmación de borrado
   confirmDeleteId: string | null = null;
   showDeleteConfirm = false;
 
@@ -62,7 +59,6 @@ export class TablaUsuarios implements OnInit {
 
   iniciarEdicion(usuario: UsuarioConId) {
     this.editId = usuario.id;
-    // clona los valores actuales para editar sin mutar directo
     this.editBuffer = { ...usuario };
   }
 
@@ -79,7 +75,7 @@ export class TablaUsuarios implements OnInit {
         this.openModal('Éxito', 'Usuario actualizado correctamente.', 'success');
         this.editId = null;
         this.editBuffer = {};
-        this.cargarUsuarios(); // refresca para asegurar consistencia
+        this.cargarUsuarios();
       },
       error: (err) => {
         console.error('Error actualizando usuario', err);
@@ -120,7 +116,6 @@ export class TablaUsuarios implements OnInit {
     this.modalMessage = message;
     this.modalType = type;
     this.showModal = true;
-    // opcional: auto-cierre en 3s si es éxito
     if (type === 'success') {
       setTimeout(() => this.closeModal(), 3000);
     }

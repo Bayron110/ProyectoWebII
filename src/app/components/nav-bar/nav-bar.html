@@ -1,62 +1,81 @@
-
 <div class="fondo">
-<nav class="barra">
-  <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
+  <nav class="barra">
+    <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
+      <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="https://i.postimg.cc/L6yjHHmG/logo.png" class="h-10 w-10 rounded-full" alt="Logo Policía" />
+        <span class="text-2xl font-semibold text-white">Policía Nacional</span>
+      </a>
 
-    <!-- LOGO -->
-    <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="https://i.postimg.cc/L6yjHHmG/logo.png" class="h-10 w-10 rounded-full" alt="Logo Policía" />
-      <span class="text-2xl font-semibold text-white">Policía Nacional</span>
-    </a>
+      <button id="navbar-toggle" type="button"
+        class="inline-flex items-center justify-center p-2 w-10 h-10 text-white rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 md:hidden"
+        aria-controls="navbar-menu" aria-expanded="false">
+        <span class="sr-only">Abrir menú</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
 
-    <button id="navbar-toggle" type="button"
-      class="inline-flex items-center justify-center p-2 w-10 h-10 text-white rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 md:hidden"
-      aria-controls="navbar-menu" aria-expanded="false">
-      <span class="sr-only">Abrir menú</span>
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-menu">
-      <ul
-        class="flex flex-col mt-4 rounded-lg bg-blue-900 md:flex-row md:space-x-8 md:mt-0 md:bg-transparent text-white font-medium">
+      <div class="hidden w-full md:block md:w-auto" id="navbar-menu">
+        <ul
+          class="flex flex-col mt-4 rounded-lg bg-blue-900 md:flex-row md:space-x-8 md:mt-0 md:bg-transparent text-white font-medium">
+          <li>
+            <a routerLink="/home" routerLinkActive="text-blue-400"
+              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+              Home
+            </a>
+          </li>
 
-        <li>
-          <a routerLink="/home" routerLinkActive="text-blue-400"
-            class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-            Home
-          </a>
-        </li>
+          @if (!auth.estaLogueado()) {
+          <li>
+            <a routerLink="/login" routerLinkActive="text-blue-400"
+              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+              Iniciar Sesión
+            </a>
+          </li>
+          <li>
+            <a routerLink="/registro" routerLinkActive="text-blue-400"
+              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+              Registro
+            </a>
+          </li>
+          }
 
-        <li>
-          <a routerLink="/registro" routerLinkActive="text-blue-400"
-            class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-            Registro
-          </a>
-        </li>
+          <li>
+            <a routerLink="/nosotros"
+              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+              Nosotros
+            </a>
+          </li>
 
-        <li>
-          <a routerLink="nosotros" class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-            Nosotros
-          </a>
-        </li>
+          @if (auth.estaLogueado()) {
+          <li>
+            <a routerLink="/rDenuncia"
+              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+              Crear Denuncia
+            </a>
+          </li>
+          <li>
+            <a routerLink="/HDenuncia"
+              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+              Historial Denuncia
+            </a>
+          <li>
+            <a routerLink="/Tabla1"
+              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+              Tabla Prueba
+            </a>
+          </li>
+          <li>
+            <button (click)="logout()"
+              class="block py-2 px-3 rounded hover:bg-red-600 md:hover:bg-transparent md:hover:text-red-400 transition-colors">
+              Cerrar Sesión
+            </button>
+          </li>
+          }
 
-        <li>
-          <a routerLink="Tabla1" class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-            Tabla Usuarios
-          </a>
-        </li>
-         <li>
-          <a routerLink="Tabla2" class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-            Tabla Oficiales
-          </a>
-        </li>
-
-
-      </ul>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </div>

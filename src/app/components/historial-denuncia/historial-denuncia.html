@@ -1,0 +1,22 @@
+<div class="historial-denuncia-wrapper">
+    <h2 class="titulo">Historial de Denuncias</h2>
+
+    @if (error) {
+    <div class="error-message">
+        {{ error }}
+    </div>
+    } @else if (denuncias.length === 0) {
+    <div class="info-message">No hay denuncias registradas.</div>
+    } @else {
+    <div class="tarjetas-container">
+        @for (denuncia of denuncias; track denuncia.id) {
+        <div class="tarjeta">
+            <p><strong>Usuario:</strong> {{ denuncia.denunciante }}</p>
+            <p><strong>Fecha:</strong> {{ denuncia.fecha | date : "medium" }}</p>
+            <p><strong>Descripción:</strong></p>
+            <p class="descripcion">{{ denuncia.descripcion }}</p>
+        </div>
+        }
+    </div>
+    }
+</div>
