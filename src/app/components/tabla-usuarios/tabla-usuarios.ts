@@ -1,28 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Registro } from '../../service/registro';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BehaviorSubject, map } from 'rxjs';
+import { UsuarioConId } from '../../interface/usuario';
 
-interface UsuarioConId {
-  id: string;
-  nombre?: string;
-  apellido?: string;
-  cedula?: string;
-  direccion?: string;
-  email?: string;
-  password?: string;
-  // cualquier otro campo
-}
+
 
 @Component({
   selector: 'app-tabla-usuarios',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,  HttpClientModule],
   templateUrl: './tabla-usuarios.html',
   styleUrls: ['./tabla-usuarios.css']
 })
-export class TablaUsuarios implements OnInit {
-  usuarios: UsuarioConId[] = [];
+export class TablaUsuarios {
+  private API_FIREBASE = 'https://proyectoapp-b0489-default-rtdb.firebaseio.com';
+
+  private usuariosSubject = new BehaviorSubject<UsuarioConId[]>([]);
+  usuarios$ = this.usuariosSubject.asObservable();
+
   loading = false;
 
   editId: string | null = null;
@@ -36,30 +33,34 @@ export class TablaUsuarios implements OnInit {
   confirmDeleteId: string | null = null;
   showDeleteConfirm = false;
 
-  constructor(private usuario1: Registro) {}
-
-  ngOnInit() {
+  constructor(private http: HttpClient) {
     this.cargarUsuarios();
   }
 
   cargarUsuarios() {
     this.loading = true;
-    this.usuario1.obtenerUsuarios().subscribe({
-      next: (list) => {
-        this.usuarios = list;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error cargando usuarios', err);
-        this.loading = false;
-        this.openModal('Error', 'No se pudieron cargar los usuarios.', 'error');
-      }
-    });
+    this.http.get<Record<string, UsuarioConId>>(`${this.API_FIREBASE}/usuarios.json`)
+      .pipe(
+        map(obj => {
+          if (!obj) return [];
+          return Object.entries(obj).map(([id, data]) => ({ id, ...data as Omit<UsuarioConId, 'id'> }));
+        })
+      )
+      .subscribe({
+        next: (list) => {
+          this.usuariosSubject.next(list);
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+          this.openModal('Error', 'No se pudieron cargar los usuarios.', 'error');
+        }
+      });
   }
 
   iniciarEdicion(usuario: UsuarioConId) {
     this.editId = usuario.id;
-    this.editBuffer = { ...usuario };
+    this.editBuffer = JSON.parse(JSON.stringify(usuario));
   }
 
   cancelarEdicion() {
@@ -69,19 +70,18 @@ export class TablaUsuarios implements OnInit {
 
   guardarEdicion() {
     if (!this.editId) return;
-    const toUpdate = { ...this.editBuffer };
-    this.usuario1.actualizarUsuario(this.editId, toUpdate).subscribe({
-      next: () => {
-        this.openModal('Éxito', 'Usuario actualizado correctamente.', 'success');
-        this.editId = null;
-        this.editBuffer = {};
-        this.cargarUsuarios();
-      },
-      error: (err) => {
-        console.error('Error actualizando usuario', err);
-        this.openModal('Error', 'No se pudo actualizar el usuario.', 'error');
-      }
-    });
+
+    this.http.put(`${this.API_FIREBASE}/usuarios/${this.editId}.json`, this.editBuffer)
+      .subscribe({
+        next: () => {
+          this.openModal('Éxito', 'Usuario actualizado correctamente.', 'success');
+          this.cancelarEdicion();
+          this.cargarUsuarios();
+        },
+        error: () => {
+          this.openModal('Error', 'No se pudo actualizar el usuario.', 'error');
+        }
+      });
   }
 
   pedirEliminar(id: string) {
@@ -96,19 +96,20 @@ export class TablaUsuarios implements OnInit {
 
   confirmarEliminar() {
     if (!this.confirmDeleteId) return;
-    this.usuario1.eliminarUsuario(this.confirmDeleteId).subscribe({
-      next: () => {
-        this.openModal('Éxito', 'Usuario eliminado correctamente.', 'success');
-        this.showDeleteConfirm = false;
-        this.confirmDeleteId = null;
-        this.cargarUsuarios();
-      },
-      error: (err) => {
-        console.error('Error eliminando usuario', err);
-        this.openModal('Error', 'No se pudo eliminar el usuario.', 'error');
-        this.showDeleteConfirm = false;
-      }
-    });
+
+    this.http.delete(`${this.API_FIREBASE}/usuarios/${this.confirmDeleteId}.json`)
+      .subscribe({
+        next: () => {
+          this.openModal('Éxito', 'Usuario eliminado correctamente.', 'success');
+          this.showDeleteConfirm = false;
+          this.confirmDeleteId = null;
+          this.cargarUsuarios();
+        },
+        error: () => {
+          this.openModal('Error', 'No se pudo eliminar el usuario.', 'error');
+          this.showDeleteConfirm = false;
+        }
+      });
   }
 
   openModal(title: string, message: string, type: 'success' | 'error') {

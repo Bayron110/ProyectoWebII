@@ -1,22 +1,31 @@
-<div class="historial-denuncia-wrapper">
-    <h2 class="titulo">Historial de Denuncias</h2>
+<div class="contenedor">
+  <h2>📋 Historial de Denuncias</h2>
 
-    @if (error) {
-    <div class="error-message">
-        {{ error }}
-    </div>
-    } @else if (denuncias.length === 0) {
-    <div class="info-message">No hay denuncias registradas.</div>
-    } @else {
-    <div class="tarjetas-container">
-        @for (denuncia of denuncias; track denuncia.id) {
-        <div class="tarjeta">
-            <p><strong>Usuario:</strong> {{ denuncia.denunciante }}</p>
-            <p><strong>Fecha:</strong> {{ denuncia.fecha | date : "medium" }}</p>
-            <p><strong>Descripción:</strong></p>
-            <p class="descripcion">{{ denuncia.descripcion }}</p>
-        </div>
-        }
-    </div>
-    }
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- The error was here: you need to use the async pipe to unwrap the observable -->
+      @for (denuncia of (denuncias$ | async); track denuncia.id) {
+        <tr>
+          <td>{{ denuncia.id }}</td>
+          <td>{{ denuncia.nombre }}</td>
+          <td>{{ denuncia.descripcion }}</td>
+          <td>{{ denuncia.fecha }}</td>
+          <td>{{ denuncia.estado }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5">No hay denuncias disponibles.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>
