@@ -1,34 +1,110 @@
-.tarjetas-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 1.5rem;
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-.tarjeta {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 1rem 1.2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+.contenedor h2 {
+    text-align: center;
+    color: #002b5c;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+
+.denuncias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+
+.denuncia-card {
+    display: flex;
+    flex-direction: column;
+    background: #f0f4fa;
+    border-radius: 8px;
+    border: 1px solid #c9d4e3;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.tarjeta:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+.denuncia-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
-.tarjeta p {
-    margin: 0.4rem 0;
+
+.card-header {
+    background: #003366;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    font-weight: bold;
     font-size: 0.95rem;
-    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.tarjeta strong {
-    color: #1a73e8;
+
+.card-body {
+    padding: 1rem 1.2rem;
+    flex: 1;
 }
+
+.card-body p {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+
+.card-body strong {
+    color: #003366;
+}
+
 
 .descripcion {
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #ccd6e0;
+    padding: 0.6rem 0.8rem;
+    margin-top: 0.4rem;
     font-size: 0.9rem;
-    color: #555;
+    line-height: 1.4;
+}
+
+
+.card-footer {
+    background: #e8eef5;
+    padding: 0.6rem 1rem;
+    border-top: 1px solid #c9d4e3;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+
+.estado-pendiente {
+    color: #856404;
+}
+
+.estado-resuelto {
+    color: #155724;
+}
+
+.estado-en_proceso {
+    color: #004085;
+}
+
+
+.card-header i, .card-body i, .card-footer i {
+    font-size: 1rem;
 }

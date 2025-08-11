@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 interface Denuncia {
   id?: string;
-  nombre: string;
+  nombre?: string; // Aseguramos que puede ser opcional para evitar errores
   descripcion: string;
   fecha: string;
   estado: string;
@@ -26,11 +26,17 @@ export class HistorialDenuncia {
   denuncias$ = this.denunciasSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.http.get<Record<string, Denuncia>>(`${this.API_FIREBASE}/denuncias.json`)
+    this.http.get<Record<string, any>>(`${this.API_FIREBASE}/denuncias.json`)
       .pipe(
         map(obj => {
           if (!obj) return [];
-          return Object.entries(obj).map(([id, data]) => ({ id, ...data }));
+          return Object.entries(obj).map(([id, data]) => ({
+            id,
+            nombre: data.nombre || data.denunciante || 'No especificado',
+            descripcion: data.descripcion,
+            fecha: data.fecha,
+            estado: data.estado
+          }));
         })
       )
       .subscribe({
@@ -38,5 +44,4 @@ export class HistorialDenuncia {
         error: err => console.error('Error al cargar denuncias:', err)
       });
   }
-
 }

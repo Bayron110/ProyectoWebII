@@ -1,31 +1,39 @@
 <div class="contenedor">
-  <h2>📋 Historial de Denuncias</h2>
+  <h2>🚓 Historial de Denuncias</h2>
 
-  <table class="tabla">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- The error was here: you need to use the async pipe to unwrap the observable -->
-      @for (denuncia of (denuncias$ | async); track denuncia.id) {
-        <tr>
-          <td>{{ denuncia.id }}</td>
-          <td>{{ denuncia.nombre }}</td>
-          <td>{{ denuncia.descripcion }}</td>
-          <td>{{ denuncia.fecha }}</td>
-          <td>{{ denuncia.estado }}</td>
-        </tr>
-      } @empty {
-        <tr>
-          <td colspan="5">No hay denuncias disponibles.</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+  <div class="denuncias-grid">
+    @for (denuncia of (denuncias$ | async); track denuncia.id) {
+      <div class="denuncia-card">
+        <div class="card-header">
+          <div class="card-id">DENUNCIA #{{ denuncia.id }}</div>
+        </div>
+
+        <div class="card-body">
+          <div class="denunciante">
+            <div class="denunciante-label">👤 Denunciante: {{ denuncia.nombre || 'No especificado' }}</div>
+            <br>
+            <div class="card-fecha">📅 Fecha Denuncia: {{ denuncia.fecha }}</div>
+          </div>
+          <br>
+          
+
+          <div class="descripcion">
+            <div class="descripcion-label">📄 Descripción del Incidente:</div>
+            <div class="descripcion-texto">{{ denuncia.descripcion }}</div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="estado-badge estado-{{ denuncia.estado?.toLowerCase() }}">
+            {{ denuncia.estado }}
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="sin-denuncias">
+        <h3>No hay denuncias registradas</h3>
+        <p>Cuando se registren denuncias aparecerán aquí</p>
+      </div>
+    }
+  </div>
 </div>

@@ -1,61 +1,101 @@
-<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow-md dark:bg-gray-800 relative">
-    <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-white text-center">
-        Registrar Denuncia
-    </h2>
+<div class="denuncia-container">
+    <div class="side-column">
+        <div class="side-card">
+            <h3>Consejos de Seguridad</h3>
+            <ul>
+                <li>Verifica la información antes de denunciar.</li>
+                <li>No compartas datos personales innecesarios.</li>
+                <li>En caso de emergencia, llama al 911.</li>
+            </ul>
+        </div>
 
-    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" [hidden]="!modalVisible"
-        (click)="cerrarModal()">
-        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg max-w-sm w-full"
-            (click)="$event.stopPropagation()">
-            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">
-                ✅ ¡Éxito!
-            </h3>
-            <p class="text-gray-700 dark:text-gray-300 mb-4">{{ mensajeExito }}</p>
-            <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full" (click)="cerrarModal()">
-                Cerrar
-            </button>
+        <div class="side-card">
+            <h3>Tipos de Denuncias</h3>
+            <ul>
+                <li>Robo o hurto</li>
+                <li>Violencia intrafamiliar</li>
+                <li>Fraudes y estafas</li>
+                <li>Desaparición de personas</li>
+            </ul>
         </div>
     </div>
 
-    <div class="mb-4 p-3 bg-red-100 text-red-700 rounded" [hidden]="!error">
-        {{ error }}
-    </div>
-
-    <form (ngSubmit)="enviarDenuncia()">
-        <div class="mb-4">
-            <label for="denunciante" class="block text-gray-700 dark:text-gray-300 mb-1">
-                Nombre del denunciante
-            </label>
-            <input type="text" id="denunciante" [(ngModel)]="denunciante" name="denunciante"
-                class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
-                [disabled]="cargando" />
-        </div>
-
-        <div class="mb-4">
-            <label for="fecha" class="block text-gray-700 dark:text-gray-300 mb-1">Fecha</label>
-            <input type="date" id="fecha" [(ngModel)]="fecha" name="fecha"
-                class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
-                [disabled]="cargando" />
-        </div>
-
-        <div class="mb-4">
-            <label for="lugar" class="block text-gray-700 dark:text-gray-300 mb-1">Lugar de la denuncia</label>
-            <input type="text" id="lugar" [(ngModel)]="lugar" name="lugar"
-                class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
-                [disabled]="cargando" />
-        </div>
-
-        <div class="mb-6">
-            <label for="descripcion" class="block text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
-            <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="4"
-                class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
-                [disabled]="cargando"></textarea>
-        </div>
-
-        <button type="submit"
-            class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
-            [disabled]="cargando">
+    <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow-md dark:bg-gray-800 relative">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-white text-center">
             Registrar Denuncia
-        </button>
-    </form>
+        </h2>
+
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" [hidden]="!modalVisible"
+            (click)="cerrarModal()">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg max-w-sm w-full"
+                (click)="$event.stopPropagation()">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">
+                    ✅ ¡Éxito!
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">{{ mensajeExito }}</p>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+                    (click)="cerrarModal()">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-4 p-3 bg-red-100 text-red-700 rounded" [hidden]="!error">
+            {{ error }}
+        </div>
+
+        <form (ngSubmit)="enviarDenuncia()">
+            <div class="mb-4">
+                <label for="denunciante" class="block text-gray-700 dark:text-gray-300 mb-1">
+                    Nombre del denunciante
+                </label>
+                <input type="text" id="denunciante" [(ngModel)]="denunciante" name="denunciante"
+                    class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
+                    [disabled]="cargando" />
+            </div>
+
+            <div class="mb-4">
+                <label for="fecha" class="block text-gray-700 dark:text-gray-300 mb-1">Fecha</label>
+                <input type="date" id="fecha" [(ngModel)]="fecha" name="fecha"
+                    class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
+                    [disabled]="cargando" />
+            </div>
+
+            <div class="mb-4">
+                <label for="lugar" class="block text-gray-700 dark:text-gray-300 mb-1">Lugar de la denuncia</label>
+                <input type="text" id="lugar" [(ngModel)]="lugar" name="lugar"
+                    class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
+                    [disabled]="cargando" />
+            </div>
+
+            <div class="mb-6">
+                <label for="descripcion" class="block text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
+                <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="4"
+                    class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required
+                    [disabled]="cargando"></textarea>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
+                [disabled]="cargando">
+                Registrar Denuncia
+            </button>
+        </form>
+    </div>
+
+    <div class="side-column">
+        <div class="side-card">
+            <h3>Contacto Rápido</h3>
+            <p><strong>Policía Nacional:</strong> 1800-335-486</p>
+            <p><strong>Emergencias:</strong> 911</p>
+            <p><strong>Denuncia en Línea:</strong> www.denuncias.gob.ec</p>
+        </div>
+
+        <div class="side-card">
+            <h3>Atención Ciudadana</h3>
+            <p>Lunes a Viernes: 08h00 - 17h00</p>
+            <p>Sábados: 08h00 - 12h00</p>
+            <p>Correo: atencionciudadana@policia.gob.ec</p>
+        </div>
+    </div>
 </div>
