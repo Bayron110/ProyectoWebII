@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 interface Denuncia {
   id?: string;
-  nombre?: string; // Aseguramos que puede ser opcional para evitar errores
+  nombre?: string;
   descripcion: string;
   fecha: string;
   estado: string;

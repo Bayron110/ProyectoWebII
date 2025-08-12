@@ -24,13 +24,12 @@ export class Auth {
       map(response => {
         if (!response) return false;
 
-        // Convierte el objeto Firebase a array con ids
         const usuarios = Object.entries(response).map(([id, data]) => ({ id, ...data }));
-        // Busca usuario con email y password coincidentes
+
         const usuarioEncontrado = usuarios.find(u => u.email === email && u.password === password);
 
         if (usuarioEncontrado) {
-          // Guarda datos en localStorage para sesión
+
           localStorage.setItem('usuarioLogueado', 'true');
           localStorage.setItem('usuarioNombre', usuarioEncontrado.nombre);
           localStorage.setItem('usuarioId', usuarioEncontrado.id ?? '');

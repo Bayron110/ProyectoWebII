@@ -4,5 +4,5 @@ export interface Denuncia {
   fecha: string;        
   lugar: string;
   descripcion: string;
-  estado?: string;       
+  estado: string;       
 }

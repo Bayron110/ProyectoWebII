@@ -1,5 +1,13 @@
-import { CanActivateChildFn } from '@angular/router';
+import { CanActivateChildFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 export const authGuard: CanActivateChildFn = (childRoute, state) => {
-  return localStorage.getItem('usuarioLogueado') === 'true';
+  const router = inject(Router);
+  const isLoggedIn = localStorage.getItem('usuarioLogueado') === 'true';
+
+  if (isLoggedIn) {
+    return true;
+  } else {
+    return router.parseUrl('/login');
+  }
 };

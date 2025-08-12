@@ -68,7 +68,6 @@ export class RegistroDenuncia {
 
   abrirModal() {
     this.modalVisible = true;
-    // Cierra modal automáticamente después de 3 segundos
     setTimeout(() => this.cerrarModal(), 3000);
   }
 

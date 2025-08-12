@@ -13,18 +13,20 @@
             <div class="denunciante-label">👤 Denunciante: {{ denuncia.nombre || 'No especificado' }}</div>
             <br>
             <div class="card-fecha">📅 Fecha Denuncia: {{ denuncia.fecha }}</div>
+            <br>
+            <div class="descripcion-label">📄 Descripción del Incidente:</div>
           </div>
           <br>
           
 
           <div class="descripcion">
-            <div class="descripcion-label">📄 Descripción del Incidente:</div>
+            
             <div class="descripcion-texto">{{ denuncia.descripcion }}</div>
           </div>
         </div>
 
         <div class="card-footer">
-          <div class="estado-badge estado-{{ denuncia.estado?.toLowerCase() }}">
+          <div class="estado-badge estado-{{ denuncia.estado.toLowerCase() }}">
             {{ denuncia.estado }}
           </div>
         </div>
