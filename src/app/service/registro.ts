@@ -1,39 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Usuario } from '../interface/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
-export class Registro {
-  private API_FIREBASE = 'https://proyectoapp-b0489-default-rtdb.firebaseio.com';
+export class RegistroService {
+  private API_URL = 'http://localhost:8080/api/usuarios';
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {}
 
-
-  guardarUsuario(usuario: any): Observable<any> {
-    return this.http.post(`${this.API_FIREBASE}/usuarios.json`, usuario);
+  guardarUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.API_URL, usuario);
   }
 
-  obtenerUsuarios(): Observable<any[]> {
-    return this.http.get<Record<string, any>>(`${this.API_FIREBASE}/usuarios.json`)
-      .pipe(
-        map(obj => {
-          if (!obj) return [];
-          return Object.entries(obj).map(([id, data]) => ({ id, ...data }));
-        })
-      );
+  obtenerUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.API_URL);
   }
 
-  obtenerUsuario(id: string): Observable<any> {
-    return this.http.get(`${this.API_FIREBASE}/usuarios/${id}.json`);
+  obtenerUsuario(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.API_URL}/${id}`);
   }
 
-  actualizarUsuario(id: string, data: any): Observable<any> {
-    return this.http.patch(`${this.API_FIREBASE}/usuarios/${id}.json`, data);
+  actualizarUsuario(id: number, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.API_URL}/${id}`, usuario);
   }
 
-  eliminarUsuario(id: string): Observable<any> {
-    return this.http.delete(`${this.API_FIREBASE}/usuarios/${id}.json`);
+  eliminarUsuario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 }

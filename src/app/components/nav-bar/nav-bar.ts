@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Auth } from '../../service/auth';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './nav-bar.html',
-  styleUrl: './nav-bar.css'
+  styleUrls: ['./nav-bar.css']
 })
 export class NavBar {
   constructor(public auth: Auth, private router: Router) {}
@@ -16,4 +17,15 @@ export class NavBar {
     this.router.navigate(['/home']);
   }
 
+  esAdmin(): boolean {
+    return localStorage.getItem('usuarioRol') === 'ADMIN';
+  }
+
+  esUsuario(): boolean {
+    return localStorage.getItem('usuarioRol') === 'USUARIO';
+  }
+
+  estaLogueado(): boolean {
+    return localStorage.getItem('usuarioLogueado') === 'true';
+  }
 }

@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Registro } from '../../service/registro';
 import { FormsModule, NgForm } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+
+import { Usuario } from '../../interface/usuario';
+import { RegistroService } from '../../service/registro';
 
 interface FlipCard {
   title: string;
@@ -52,12 +54,13 @@ export class FormularioRegistro {
     }
   ];
 
+  // Campos del formulario
   nombre = '';
   apellido = '';
-  cedula: string = '';
+  cedula = '';
   direccion = '';
-  email = '';
-  password = '';
+  correoE = ''; // ahora coincide con el backend
+  contrasena = ''; // ahora coincide con el backend
 
   showModal = false;
   modalTitle = '';
@@ -65,7 +68,7 @@ export class FormularioRegistro {
   modalType: 'success' | 'error' = 'success';
   loading = false;
 
-  constructor(private usuarioServicio: Registro) {}
+  constructor(private usuarioServicio: RegistroService) {}
 
   toggleFlip(card: FlipCard) {
     card.flipped = !card.flipped;
@@ -79,19 +82,19 @@ export class FormularioRegistro {
 
     this.loading = true;
 
-    const payload = {
+    const payload: Usuario = {
       nombre: this.nombre,
       apellido: this.apellido,
       cedula: this.cedula,
       direccion: this.direccion,
-      email: this.email,
-      password: this.password
+      correoE: this.correoE,
+      contrasena: this.contrasena
     };
 
     this.usuarioServicio.guardarUsuario(payload)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
-        next: (res: any) => {
+        next: () => {
           this.modalType = 'success';
           this.modalTitle = 'Éxito';
           this.modalMessage = 'El usuario se guardó correctamente.';
@@ -99,7 +102,7 @@ export class FormularioRegistro {
           formulario.resetForm();
           setTimeout(() => this.closeModal(), 3000);
         },
-        error: (err: any) => {
+        error: (err) => {
           console.error('Error al guardar usuario', err);
           this.modalType = 'error';
           this.modalTitle = 'Error';

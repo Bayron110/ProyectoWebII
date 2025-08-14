@@ -1,13 +1,13 @@
 export interface Usuario {
-    id?: string,
-    nombre: string,
-    apellido: string,
-    cedula: number,
-    direccion: string,
-    email: string,
-    password: string;
-
+    id?: number;       
+    nombre: string;
+    apellido: string;
+    cedula: string;   
+    direccion: string;
+    correoE: string;    
+    contrasena: string; 
 }
+
 export interface UsuarioConId {
     id: string;
     nombre?: string;

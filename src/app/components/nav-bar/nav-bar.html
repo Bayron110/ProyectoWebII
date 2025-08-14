@@ -19,6 +19,7 @@
       <div class="hidden w-full md:block md:w-auto" id="navbar-menu">
         <ul
           class="flex flex-col mt-4 rounded-lg bg-blue-900 md:flex-row md:space-x-8 md:mt-0 md:bg-transparent text-white font-medium">
+          
           <li>
             <a routerLink="/home" routerLinkActive="text-blue-400"
               class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
@@ -27,18 +28,18 @@
           </li>
 
           @if (!auth.estaLogueado()) {
-          <li>
-            <a routerLink="/login" routerLinkActive="text-blue-400"
-              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-              Iniciar Sesión
-            </a>
-          </li>
-          <li>
-            <a routerLink="/registro" routerLinkActive="text-blue-400"
-              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-              Registro
-            </a>
-          </li>
+            <li>
+              <a routerLink="/login" routerLinkActive="text-blue-400"
+                class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+                Iniciar Sesión
+              </a>
+            </li>
+            <li>
+              <a routerLink="/registro" routerLinkActive="text-blue-400"
+                class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+                Registro
+              </a>
+            </li>
           }
 
           <li>
@@ -48,30 +49,43 @@
             </a>
           </li>
 
+          @if (auth.estaLogueado() && auth.esUsuario()) {
+            <li>
+              <a routerLink="/rDenuncia"
+                class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+                Crear Denuncia
+              </a>
+            </li>
+            <li>
+              <a routerLink="/HDenuncia"
+                class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+                Historial Denuncia
+              </a>
+            </li>
+          }
+
+          @if (auth.estaLogueado() && auth.esAdmin()) {
+            <li>
+              <a routerLink="/vista-admin"
+                class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+                Vista Admin
+              </a>
+            </li>
+            <li>
+              <a routerLink="/Tabla1"
+                class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
+                Tabla Usuarios
+              </a>
+            </li>
+          }
+
           @if (auth.estaLogueado()) {
-          <li>
-            <a routerLink="/rDenuncia"
-              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-              Crear Denuncia
-            </a>
-          </li>
-          <li>
-            <a routerLink="/HDenuncia"
-              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-              Historial Denuncia
-            </a>
-          <li>
-            <a routerLink="/Tabla1"
-              class="block py-2 px-3 rounded hover:bg-blue-800 md:hover:bg-transparent md:hover:text-blue-400 transition-colors">
-              Tabla Prueba
-            </a>
-          </li>
-          <li>
-            <button (click)="logout()"
-              class="block py-2 px-3 rounded hover:bg-red-600 md:hover:bg-transparent md:hover:text-red-400 transition-colors">
-              Cerrar Sesión
-            </button>
-          </li>
+            <li>
+              <button (click)="logout()"
+                class="block py-2 px-3 rounded hover:bg-red-600 md:hover:bg-transparent md:hover:text-red-400 transition-colors">
+                Cerrar Sesión
+              </button>
+            </li>
           }
 
         </ul>

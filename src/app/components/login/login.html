@@ -2,28 +2,28 @@
     <div class="side-box">
         <h3>Consejos de Seguridad</h3>
         <ul>
-            <li> Verifica la información antes de denunciar.</li>
-            <li> No compartas datos personales innecesarios.</li>
-            <li> En caso de emergencia, llama al 911.</li>
+            <li>Verifica la información antes de denunciar.</li>
+            <li>No compartas datos personales innecesarios.</li>
+            <li>En caso de emergencia, llama al 911.</li>
         </ul>
         <h3>Tipos de Denuncias</h3>
         <ul>
-            <li> Robo o hurto</li>
-            <li> Violencia intrafamiliar</li>
-            <li> Fraudes y estafas</li>
-            <li> Desaparición de personas</li>
+            <li>Robo o hurto</li>
+            <li>Violencia intrafamiliar</li>
+            <li>Fraudes y estafas</li>
+            <li>Desaparición de personas</li>
         </ul>
     </div>
 
-    <form class="login-form" (submit)="iniciarSesion(); $event.preventDefault()">
+    <form class="login-form" (ngSubmit)="iniciarSesion()">
         <h2>🔐 Iniciar Sesión</h2>
-        @if (error) {
-        <div class="error-message">{{ error }}</div>
-        }
-        <label for="email">Correo electrónico</label>
-        <input id="email" type="email" [(ngModel)]="email" name="email" required />
-        <label for="password">Contraseña</label>
-        <input id="password" type="password" [(ngModel)]="password" name="password" required />
+        <div class="error-message" *ngIf="error">{{ error }}</div>
+        <label for="correoE">Correo electrónico</label>
+        <input id="correoE" type="email" [(ngModel)]="correoE" name="correoE" required />
+
+        <label for="contrasena">Contraseña</label>
+        <input id="contrasena" type="password" [(ngModel)]="contrasena" name="contrasena" required />
+
         <button type="submit">Iniciar sesión</button>
     </form>
 
