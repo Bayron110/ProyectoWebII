@@ -1,4 +1,5 @@
 <div class="login-container">
+
     <div class="side-box">
         <h3>Consejos de Seguridad</h3>
         <ul>
@@ -6,6 +7,7 @@
             <li>No compartas datos personales innecesarios.</li>
             <li>En caso de emergencia, llama al 911.</li>
         </ul>
+
         <h3>Tipos de Denuncias</h3>
         <ul>
             <li>Robo o hurto</li>
@@ -17,7 +19,10 @@
 
     <form class="login-form" (ngSubmit)="iniciarSesion()">
         <h2>🔐 Iniciar Sesión</h2>
-        <div class="error-message" *ngIf="error">{{ error }}</div>
+        @if (error) {
+        <div class="error-message">{{ error }}</div>
+        }
+
         <label for="correoE">Correo electrónico</label>
         <input id="correoE" type="email" [(ngModel)]="correoE" name="correoE" required />
 
@@ -32,9 +37,11 @@
         <p><strong>Policía Nacional:</strong> 1800-335-486</p>
         <p><strong>Emergencias:</strong> 911</p>
         <p><strong>Denuncia en Línea:</strong> www.denuncias.gob.ec</p>
+
         <h3>Atención Ciudadana</h3>
         <p>Lunes a Viernes: 08h00 - 17h00</p>
         <p>Sábados: 08h00 - 12h00</p>
         <p>Correo: atencionciudadana@policia.gob.ec</p>
     </div>
+
 </div>

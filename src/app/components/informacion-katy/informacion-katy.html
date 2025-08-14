@@ -1,18 +1,15 @@
-<!-- nosotros.component.html -->
 <div class="nosotros-container">
 
-    <!-- Header Section -->
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">Policía Nacional del Ecuador</h1>
             <p class="hero-subtitle">Comprometidos con la seguridad y el bienestar de todos los ecuatorianos</p>
         </div>
         <div class="hero-image">
-            <img src="https://i.postimg.cc/L6yjHHmG/logo.png">
+            <img src="https://i.postimg.cc/L6yjHHmG/logo.png" alt="Logo Policía Nacional">
         </div>
     </section>
 
-    <!-- Misión Section -->
     <section class="section mision-section">
         <div class="container">
             <div class="section-header">
@@ -29,7 +26,6 @@
         </div>
     </section>
 
-    <!-- Visión Section -->
     <section class="section vision-section">
         <div class="container">
             <div class="section-header">
@@ -46,7 +42,6 @@
         </div>
     </section>
 
-    <!-- Objetivo Section -->
     <section class="section objetivo-section">
         <div class="container">
             <div class="section-header">
@@ -64,7 +59,6 @@
         </div>
     </section>
 
-    <!-- Valores Section -->
     <section class="section valores-section">
         <div class="container">
             <div class="section-header">
@@ -72,18 +66,19 @@
                 <h2 class="section-title">Nuestros Valores</h2>
             </div>
             <div class="valores-grid">
-                <div class="valor-card" *ngFor="let valor of valores">
+                @for (valor of valores; track valor.titulo) {
+                <div class="valor-card">
                     <div class="valor-icon">
-                        <img [src]="valor.icono" alt="Icono del valor">
+                        <img [src]="valor.icono" alt="Icono del valor {{ valor.titulo }}">
                     </div>
-                    <h3 class="valor-titulo">{{valor.titulo}}</h3>
-                    <p class="valor-descripcion">{{valor.descripcion}}</p>
+                    <h3 class="valor-titulo">{{ valor.titulo }}</h3>
+                    <p class="valor-descripcion">{{ valor.descripcion }}</p>
                 </div>
+                }
             </div>
         </div>
     </section>
 
-    <!-- Servicios Section -->
     <section class="section servicios-section">
         <div class="container">
             <div class="section-header">
@@ -91,18 +86,19 @@
                 <h2 class="section-title">Nuestros Servicios</h2>
             </div>
             <div class="servicios-grid">
-                <div class="servicio-card" *ngFor="let servicio of servicios">
+                @for (servicio of servicios; track servicio.titulo) {
+                <div class="servicio-card">
                     <div class="servicio-icon">
-                        <img [src]="servicio.icon" alt="Icon servicio" >
+                        <img [src]="servicio.icon" alt="Icon servicio {{ servicio.titulo }}">
                     </div>
-                    <h3 class="servicio-titulo">{{servicio.titulo}}</h3>
-                    <p class="servicio-descripcion">{{servicio.descripcion}}</p>
+                    <h3 class="servicio-titulo">{{ servicio.titulo }}</h3>
+                    <p class="servicio-descripcion">{{ servicio.descripcion }}</p>
                 </div>
+                }
             </div>
         </div>
     </section>
 
-    <!-- Contact/CTA Section -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">

@@ -1,1 +1,105 @@
-<p>vista-admin works!</p>
+<div class="admin-container">
+
+    <div class="admin-header">
+        <div class="header-content">
+            <div class="profile-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <h1 class="profile-title">Perfil del Administrador</h1>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header">
+            <i class="fas fa-edit"></i>
+            <h2>Información Personal</h2>
+        </div>
+        <div class="info-content">
+            <div class="info-item">
+                <i class="fas fa-user"></i>
+                <span class="info-label">Nombre:</span>
+                <span class="info-value">{{ adminInfo.nombre }}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ adminInfo.email }}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-user-shield"></i>
+                <span class="info-label">Rol:</span>
+                <span class="info-value role-badge">{{ adminInfo.rol }}</span>
+            </div>
+        </div>
+        <div class="view-all-section">
+            <button class="view-all-btn" (click)="verTodasDenuncias()">
+                <i class="fas fa-clipboard-list"></i>
+                Ver todas las denuncias
+            </button>
+        </div>
+    </div>
+
+
+    <div class="denuncias-card">
+        <div class="card-header">
+            <i class="fas fa-folder-open"></i>
+            <h2>Denuncias Registradas</h2>
+        </div>
+
+        <div class="table-container">
+            <table class="denuncias-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Categoría</th>
+                        <th>Descripción</th>
+                        <th>Calle Principal</th>
+                        <th>Calle Secundaria</th>
+                        <th>Referencia</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let denuncia of denuncias">
+                        <td>{{ denuncia.id }}</td>
+                        <td>{{ denuncia.categoria }}</td>
+                        <td class="descripcion-cell">
+                            {{ denuncia.descripcion }}
+                            <button class="ver-descripcion-btn" (click)="verDescripcion(denuncia)">
+                                Ver Descripción
+                            </button>
+                        </td>
+                        <td>{{ denuncia.callePrincipal }}</td>
+                        <td>{{ denuncia.calleSecundaria }}</td>
+                        <td>{{ denuncia.referencia }}</td>
+                        <td>{{ denuncia.fecha }}</td>
+                        <td>
+                            <span class="estado-badge" [ngClass]="'estado-' + denuncia.estado.toLowerCase()">
+                                {{ denuncia.estado }}
+                            </span>
+                        </td>
+                        <td class="acciones-cell">
+                            <button class="action-btn aprobar-btn" (click)="aprobarDenuncia(denuncia)"
+                                [disabled]="denuncia.estado === 'APROBADO'">
+                                <i class="fas fa-check"></i>
+                                Aprobado
+                            </button>
+                            <button class="action-btn rechazar-btn" (click)="rechazarDenuncia(denuncia)"
+                                [disabled]="denuncia.estado === 'RECHAZADO'">
+                                <i class="fas fa-times"></i>
+                                Rechazado
+                            </button>
+                            <button class="action-btn pendiente-btn" (click)="marcarPendiente(denuncia)"
+                                [disabled]="denuncia.estado === 'PENDIENTE'">
+                                <i class="fas fa-clock"></i>
+                                Pendiente
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,47 +1,40 @@
-
 <div class="cards-container">
-  <ng-container *ngIf="oficialesFiltrados$ | async as oficialesFiltrados">
-    <div
-      *ngFor="let oficial of oficialesFiltrados; trackBy: trackByNombre"
-      class="officer-card"
-    >
-      <div class="card-header">
-        <img
-          [src]="oficial.foto"
-          [alt]="oficial.nombre"
-          class="officer-photo"
-          loading="lazy"
-        />
-        <h3 class="officer-name">{{ oficial.nombre }}</h3>
-      </div>
-      <div class="card-content">
-        <div class="officer-info">
-          <div class="info-item">
-            <div class="info-icon">R</div>
-            <span class="info-label">Rango:</span>
-            <span class="info-value">{{ oficial.rango }}</span>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">P</div>
-            <span class="info-label">País:</span>
-            <span class="info-value">{{ oficial.pais }}</span>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">E</div>
-            <span class="info-label">Especialidad:</span>
-            <span class="info-value">{{ oficial.especialidad }}</span>
-          </div>
+  @for (oficial of oficialesFiltrados(); track trackByNombre(oficial)){
+  <div class="officer-card">
+    <div class="card-header">
+      <img [src]="oficial.foto" [alt]="oficial.nombre" class="officer-photo" loading="lazy" />
+      <h3 class="officer-name">{{ oficial.nombre }}</h3>
+    </div>
+    <div class="card-content">
+      <div class="officer-info">
+        <div class="info-item">
+          <div class="info-icon">R</div>
+          <span class="info-label">Rango:</span>
+          <span class="info-value">{{ oficial.rango }}</span>
         </div>
-        <div class="specialty-badge">{{ oficial.especialidad }}</div>
+        <div class="info-item">
+          <div class="info-icon">P</div>
+          <span class="info-label">País:</span>
+          <span class="info-value">{{ oficial.pais }}</span>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">E</div>
+          <span class="info-label">Especialidad:</span>
+          <span class="info-value">{{ oficial.especialidad }}</span>
+        </div>
       </div>
+      <div class="specialty-badge">{{ oficial.especialidad }}</div>
     </div>
+  </div>
+  }
 
-    <div *ngIf="oficialesFiltrados.length === 0" class="no-results">
-      <div class="no-results-icon">🔍</div>
-      <div class="no-results-text">No se encontraron oficiales</div>
-      <div class="no-results-subtext">
-        Intenta ajustar los filtros de búsqueda
-      </div>
+  @if (oficialesFiltrados().length === 0) {
+  <div class="no-results">
+    <div class="no-results-icon">🔍</div>
+    <div class="no-results-text">No se encontraron oficiales</div>
+    <div class="no-results-subtext">
+      Intenta ajustar los filtros de búsqueda
     </div>
-  </ng-container>
+  </div>
+  }
 </div>

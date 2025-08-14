@@ -1,0 +1,328 @@
+.admin-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #83889c 0%, #6e758a 100%);
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+
+.admin-header {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-icon i {
+    font-size: 2.5rem;
+    color: #195cc9;
+}
+
+.profile-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.logout-btn {
+    background: #195cc9;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #3367d6;
+    transform: translateY(-2px);
+}
+
+.info-card,
+.denuncias-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #0444ac, #195cc9);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-header i {
+    font-size: 1.5rem;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.info-content {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 250px;
+}
+
+.info-item i {
+    font-size: 1.2rem;
+    color: #4285f4;
+    width: 20px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.info-value {
+    color: #34495e;
+}
+
+.role-badge {
+    background: #ffd700;
+    color: #2c3e50;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.view-all-section {
+    padding: 0 30px 30px;
+}
+
+.view-all-btn {
+    background: #0444ac;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+
+.view-all-btn:hover {
+    background: #3367d6;
+    transform: translateY(-2px);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.denuncias-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.denuncias-table th {
+    background: #4285f4;
+    color: white;
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.denuncias-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #e1e5e9;
+    vertical-align: middle;
+}
+
+.denuncias-table tbody tr:hover {
+    background: rgba(66, 133, 244, 0.05);
+}
+
+.descripcion-cell {
+    max-width: 200px;
+}
+
+.ver-descripcion-btn {
+    background: transparent;
+    color: #0444ac;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    display: block;
+    margin-top: 4px;
+}
+
+.ver-descripcion-btn:hover {
+    background: rgba(66, 133, 244, 0.1);
+}
+
+.estado-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.estado-pendiente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.estado-aprobado {
+    background: #d4edda;
+    color: #155724;
+}
+
+.estado-rechazado {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.acciones-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 120px;
+}
+
+.action-btn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.aprobar-btn {
+    background: #28a745;
+    color: white;
+}
+
+.aprobar-btn:hover:not(:disabled) {
+    background: #218838;
+}
+
+.rechazar-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.rechazar-btn:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.pendiente-btn {
+    background: #ffc107;
+    color: #212529;
+}
+
+.pendiente-btn:hover:not(:disabled) {
+    background: #e0a800;
+}
+
+.action-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.action-btn i {
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .info-content {
+        flex-direction: column;
+    }
+
+    .denuncias-table {
+        font-size: 0.8rem;
+    }
+
+    .acciones-cell {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        width: auto;
+        min-width: 90px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 10px;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .profile-title {
+        font-size: 1.5rem;
+    }
+
+    .card-header {
+        padding: 15px 20px;
+    }
+
+    .info-content {
+        padding: 20px;
+    }
+
+    .view-all-section {
+        padding: 0 20px 20px;
+    }
+}

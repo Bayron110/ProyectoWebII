@@ -54,13 +54,13 @@ export class FormularioRegistro {
     }
   ];
 
-  // Campos del formulario
+
   nombre = '';
   apellido = '';
   cedula = '';
   direccion = '';
-  correoE = ''; // ahora coincide con el backend
-  contrasena = ''; // ahora coincide con el backend
+  correoE = '';
+  contrasena = ''; 
 
   showModal = false;
   modalTitle = '';
@@ -100,7 +100,7 @@ export class FormularioRegistro {
           this.modalMessage = 'El usuario se guardó correctamente.';
           this.showModal = true;
           formulario.resetForm();
-          setTimeout(() => this.closeModal(), 3000);
+          setTimeout(() => this.closeModal(), 30000);
         },
         error: (err) => {
           console.error('Error al guardar usuario', err);

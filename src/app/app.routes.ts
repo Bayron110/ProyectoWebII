@@ -13,13 +13,13 @@ import { VistaAdmin } from './components/vista-admin/vista-admin';
 import { adminGuard } from './guards/admin-guard-guard';
 
 export const routes: Routes = [
-    // Rutas públicas
+
     { path: "home", component: Home },
     { path: "login", component: Login },
     { path: "registro", component: Registro },
     { path: "nosotros", component: Nosotros },
+    {path:"Tablap", component:TablaOficiales},
 
-    // Rutas admin
     {
         path: "",
         canActivateChild: [adminGuard],
@@ -30,7 +30,6 @@ export const routes: Routes = [
         ]
     },
 
-    // Rutas usuario
     {
         path: "",
         canActivateChild: [authGuard],
@@ -40,6 +39,5 @@ export const routes: Routes = [
         ]
     },
 
-    // Redirección por defecto
     { path: "", redirectTo: "/home", pathMatch: "full" }
 ];

@@ -38,7 +38,7 @@ export class TablaUsuarios {
   }
 
   cargarUsuarios() {
-    this.loading = true;
+    this.loading = false;
     this.http.get<Record<string, UsuarioConId>>(`${this.API_FIREBASE}/usuarios.json`)
       .pipe(
         map(obj => {

@@ -23,13 +23,10 @@ export class Login {
       this.error = 'Por favor ingrese correo y contraseña.';
       return;
     }
-
     this.auth.login(this.correoE.trim(), this.contrasena.trim()).subscribe(
       res => {
         if (res.success) {
           this.error = null;
-
-          // Redirigir según rol
           if (res.rol === 'ADMIN') {
             this.router.navigate(['/vista-admin']);
           } else if (res.rol === 'USUARIO') {
@@ -42,7 +39,7 @@ export class Login {
         }
       },
       () => {
-        this.error = 'Error al conectar con el servidor.';
+        this.error = 'Crednenciales Incorrectas. Intentalo de Nuevo';
       }
     );
   }

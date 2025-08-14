@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthDenuncia } from '../../service/auth-denuncia';
 import { Denuncia } from '../../interface/denuncia';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registro-denuncia',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './registro-denuncia.html',
   styleUrls: ['./registro-denuncia.css']
 })
@@ -22,7 +23,7 @@ export class RegistroDenuncia {
   modalVisible = false;
   cargando = false;
 
-  constructor(private authDenuncia: AuthDenuncia) {}
+  constructor(private authDenuncia: AuthDenuncia, private cd: ChangeDetectorRef) {}
 
   enviarDenuncia() {
     if (this.cargando) return;
@@ -67,9 +68,14 @@ export class RegistroDenuncia {
   }
 
   abrirModal() {
-    this.modalVisible = true;
-    setTimeout(() => this.cerrarModal(), 3000);
-  }
+  this.modalVisible = true;
+  this.cd.markForCheck(); 
+  setTimeout(() => {
+    this.cerrarModal();
+    this.cd.markForCheck();
+  }, 30000);
+}
+
 
   cerrarModal() {
     this.modalVisible = false;
