@@ -1,4 +1,3 @@
-/* Fondo con imagen y overlay */
 .page-wrapper {
     position: relative;
     min-height: 100vh;
@@ -15,11 +14,10 @@
     position: absolute;
     inset: 0;
     background: rgba(10, 25, 50, 0.45);
-    /* oscurece ligeramente para contraste */
+
     pointer-events: none;
 }
 
-/* Grid: tarjetas - formulario - tarjetas */
 .content-grid {
     position: relative;
     display: grid;
@@ -40,7 +38,7 @@
     width: 100%;
     max-width: 500px;
     padding: 2rem;
-    background: #e0f2fe;
+    background: #dddde0;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
@@ -81,7 +79,7 @@
 }
 
 .input-icon input:focus {
-    border-color: #4f46e5;
+    border-color:  #3b82f6;
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
@@ -102,7 +100,7 @@
 }
 
 .btn-primary {
-    background-color: #2678c9f0;
+    background-color: #2a34bef0;
     color: white;
 }
 
@@ -111,7 +109,7 @@
 }
 
 .btn-secondary {
-    background-color: #6b7280;
+    background-color: #2b55aa;
     color: white;
 }
 
@@ -121,15 +119,14 @@
 
 .btn-outline {
     background-color: transparent;
-    border: 2px solid #5599ddf0;
-    color: #5599ddf0;
+    border: 2px solid #2b36caf0;
+    color: #2b3eebf0;
 }
 
 .btn-outline:hover {
     background-color: #eef2ff;
 }
 
-/* Tarjetas flip (publicidad) */
 .side-cards {
     display: flex;
     flex-direction: column;
@@ -176,7 +173,7 @@
 }
 
 .front {
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    background: linear-gradient(135deg, #3b82f6, #0c0480);
 }
 
 .front .icon {
@@ -191,7 +188,7 @@
 }
 
 .back {
-    background: linear-gradient(135deg, #10b981, #3b82f6);
+    background: linear-gradient(135deg, #000000, #3b82f6);
     transform: rotateY(180deg);
 }
 

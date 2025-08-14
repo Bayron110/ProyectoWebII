@@ -40,20 +40,6 @@ export class TablaOficiales {
       of.pais.toLowerCase().includes(p)
     );
   });
-
-
-  onNombreChange(valor: string) {
-    this.nombre.set(valor);
-  }
-
-  onRangoChange(valor: string) {
-    this.rango.set(valor);
-  }
-
-  onPaisChange(valor: string) {
-    this.pais.set(valor);
-  }
-
   trackByNombre( oficial: Oficial): string {
   return oficial.nombre;
 }
