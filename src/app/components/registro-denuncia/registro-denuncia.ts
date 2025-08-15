@@ -12,18 +12,24 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./registro-denuncia.css']
 })
 export class RegistroDenuncia {
-  denunciante = '';
-  fecha = '';
+  categoria = '';
   descripcion = '';
-  lugar = '';
-
+  callePrincipal = '';
+  calleSecundaria = '';
+  referenciaVisible = '';
+  fecha = '';
+  denunciante = '';
   mensajeExito = '';
   error = '';
-
   modalVisible = false;
   cargando = false;
 
-  constructor(private authDenuncia: AuthDenuncia, private cd: ChangeDetectorRef) {}
+  constructor(private authDenuncia: AuthDenuncia, private cd: ChangeDetectorRef) {
+    const usuarioNombre = localStorage.getItem('usuarioNombre'); // Cambia esta clave si usas otra
+    if (usuarioNombre) {
+      this.denunciante = usuarioNombre;
+    }
+  }
 
   enviarDenuncia() {
     if (this.cargando) return;
@@ -31,7 +37,7 @@ export class RegistroDenuncia {
     this.error = '';
     this.mensajeExito = '';
 
-    if (!this.denunciante || !this.fecha || !this.descripcion || !this.lugar) {
+    if (!this.categoria || !this.descripcion || !this.callePrincipal || !this.calleSecundaria || !this.referenciaVisible || !this.fecha || !this.denunciante) {
       this.error = 'Por favor, complete todos los campos.';
       return;
     }
@@ -39,11 +45,14 @@ export class RegistroDenuncia {
     this.cargando = true;
 
     const nuevaDenuncia: Denuncia = {
-      denunciante: this.denunciante,
-      fecha: this.fecha,
+      categoria: this.categoria,
       descripcion: this.descripcion,
-      lugar: this.lugar,
-      estado: 'pendiente'
+      callePrincipal: this.callePrincipal,
+      calleSecundaria: this.calleSecundaria,
+      referenciaVisible: this.referenciaVisible,
+      fecha: this.fecha,
+      denunciante: this.denunciante,
+      estado: 'PENDIENTE'
     };
 
     this.authDenuncia.guardarDenuncia(nuevaDenuncia).subscribe({
@@ -61,21 +70,22 @@ export class RegistroDenuncia {
   }
 
   limpiarCampos() {
-    this.denunciante = '';
-    this.fecha = '';
+    this.categoria = '';
     this.descripcion = '';
-    this.lugar = '';
+    this.callePrincipal = '';
+    this.calleSecundaria = '';
+    this.referenciaVisible = '';
+    this.fecha = '';
   }
 
   abrirModal() {
-  this.modalVisible = true;
-  this.cd.markForCheck(); 
-  setTimeout(() => {
-    this.cerrarModal();
+    this.modalVisible = true;
     this.cd.markForCheck();
-  }, 30000);
-}
-
+    setTimeout(() => {
+      this.cerrarModal();
+      this.cd.markForCheck();
+    }, 3000);
+  }
 
   cerrarModal() {
     this.modalVisible = false;

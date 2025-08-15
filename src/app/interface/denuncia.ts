@@ -1,8 +1,11 @@
 export interface Denuncia {
-  id?: string;
-  denunciante: string;
-  fecha: string;        
-  lugar: string;
+  id?: number | string;
+  categoria: string;
   descripcion: string;
-  estado: string;       
+  callePrincipal: string;
+  calleSecundaria: string;
+  referenciaVisible: string;
+  fecha: string;  
+  estado?: string; 
+  denunciante: string;
 }

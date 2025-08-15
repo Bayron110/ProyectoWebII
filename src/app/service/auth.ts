@@ -18,6 +18,7 @@ export class Auth {
   private API_URL = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
+  
 
   login(correoE: string, contrasena: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.API_URL}/login`, { correoE, contrasena }).pipe(
@@ -34,8 +35,11 @@ export class Auth {
     );
   }
 
-  logout(): void {
-    localStorage.clear();
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('usuarioRol');
+    localStorage.setItem('usuarioLogueado', 'false');
   }
 
   estaLogueado(): boolean {

@@ -1,5 +1,4 @@
 <div class="admin-container">
-
     <div class="admin-header">
         <div class="header-content">
             <div class="profile-icon">
@@ -31,14 +30,19 @@
                 <span class="info-value role-badge">{{ adminInfo.rol }}</span>
             </div>
         </div>
+
+        <!-- Botones para alternar tablas -->
         <div class="view-all-section">
-            <button class="view-all-btn" (click)="verTodasDenuncias()">
+            <button class="view-all-btn" (click)="verTodasDenuncias()" [disabled]="!mostrandoPanicos">
                 <i class="fas fa-clipboard-list"></i>
                 Ver todas las denuncias
             </button>
+            <button class="view-all-btn" (click)="cargarDenunciasPanico()" [disabled]="mostrandoPanicos">
+                <i class="fas fa-bell"></i>
+                Ver denuncias de pánico
+            </button>
         </div>
     </div>
-
 
     <div class="denuncias-card">
         <div class="card-header">
@@ -46,7 +50,8 @@
             <h2>Denuncias Registradas</h2>
         </div>
 
-        <div class="table-container">
+        <!-- Tabla denuncias normales -->
+        <div class="table-container" *ngIf="!mostrandoPanicos && !cargando && !error">
             <table class="denuncias-table">
                 <thead>
                     <tr>
@@ -73,10 +78,10 @@
                         </td>
                         <td>{{ denuncia.callePrincipal }}</td>
                         <td>{{ denuncia.calleSecundaria }}</td>
-                        <td>{{ denuncia.referencia }}</td>
+                        <td>{{ denuncia.referenciaVisible }}</td>
                         <td>{{ denuncia.fecha }}</td>
                         <td>
-                            <span class="estado-badge" [ngClass]="'estado-' + denuncia.estado.toLowerCase()">
+                            <span class="estado-badge" [ngClass]="'estado-' + denuncia.estado?.toLowerCase()">
                                 {{ denuncia.estado }}
                             </span>
                         </td>
@@ -100,6 +105,58 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <!-- Tabla denuncias pánico -->
+        <div class="table-container" *ngIf="mostrandoPanicos && !cargando && !error">
+            <table class="denuncias-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Lugar</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let panico of panicos">
+                        <td>{{ panico.id }}</td>
+                        <td>{{ panico.fecha }}</td>
+                        <td>{{ panico.lugar }}</td>
+                        <td>
+                            <span class="estado-badge" [ngClass]="'estado-' + panico.estado?.toLowerCase()">
+                                {{ panico.estado }}
+                            </span>
+                        </td>
+                        <td class="acciones-cell">
+                            <button class="action-btn aprobar-btn" (click)="aprobarPanico(panico)" [disabled]="panico.estado === 'APROBADO'">
+                                <i class="fas fa-check"></i>
+                                Aprobado
+                            </button>
+                            <button class="action-btn rechazar-btn" (click)="rechazarPanico(panico)" [disabled]="panico.estado === 'RECHAZADO'">
+                                <i class="fas fa-times"></i>
+                                Rechazado
+                            </button>
+                            <button class="action-btn pendiente-btn" (click)="marcarPendientePanico(panico)" [disabled]="panico.estado === 'PENDIENTE'">
+                                <i class="fas fa-clock"></i>
+                                Pendiente
+                            </button>
+                            <button class="action-btn ver-descripcion-btn" (click)="verDescripcionPanico(panico)">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalles
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="cargando">
+            <p>Cargando denuncias...</p>
+        </div>
+        <div *ngIf="error" class="error">
+            {{ error }}
         </div>
     </div>
 </div>

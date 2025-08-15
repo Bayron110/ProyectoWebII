@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthDenuncia } from '../../service/auth-denuncia';
-import { Denuncia } from '../../interface/denuncia';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs/operators';
+import { AuthPanico } from '../../service/auth-panico';
+import { Panico } from '../../interface/DenunciaRapida';
 
 @Component({
   selector: 'app-boton-panico',
@@ -13,77 +13,60 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./boton-panico.css']
 })
 export class BotonPanicoComponent {
-  mostrarModal = false;
-  fecha = '';
-  lugar = '';
-  descripcion = '';
-  cargando = false;
-  mensajeExito = '';
-  error = '';
+  mensaje: string = '';
+  error: string = '';
+  mensajeExito: string = '';
+  cargando: boolean = false;
+  mostrarModal: boolean = false;
 
-  constructor(private authDenuncia: AuthDenuncia) { }
+  fecha: string = '';
+  lugar: string = '';
+
+  constructor(private authPanico: AuthPanico) {}
 
   abrirModalDenuncia(): void {
-    this.fecha = new Date().toISOString().slice(0, 10);
     this.mostrarModal = true;
-    this.error = '';
     this.mensajeExito = '';
+    this.error = '';
+    this.fecha = new Date().toISOString().split('T')[0];
+    this.lugar = '';
   }
 
   cerrarModal(): void {
     this.mostrarModal = false;
+    this.fecha = '';
     this.lugar = '';
-    this.descripcion = '';
+    this.mensajeExito = '';
     this.error = '';
-    this.cargando = false;
   }
 
   enviarDenuncia(): void {
-    if (this.cargando) return;
-    if (!this.validarCampos()) {
-      this.error = 'Por favor, complete todos los campos correctamente.';
-      return;
-    }
-
-    this.cargando = true;
     this.error = '';
+    this.mensajeExito = '';
+    this.cargando = true;
 
-    const denunciaAnonima: Denuncia = {
-      denunciante: 'Anónimo',
-      fecha: this.fecha,
-      descripcion: this.descripcion.trim(),
-      lugar: this.lugar.trim(),
-      estado: 'pendiente'
+    const panico: Panico = {
+      fecha: new Date(this.fecha).toISOString(),
+      lugar: this.lugar,
+      estado: 'ACTIVO',
+      denunciante: 'Usuario Anónimo'
     };
 
-    this.authDenuncia.guardarDenuncia(denunciaAnonima)
-      .pipe(
-        finalize(() => this.cargando = false)
-      )
+    this.authPanico.crearPanico(panico)
+      .pipe(finalize(() => this.cargando = false))
       .subscribe({
-        next: () => this.mostrarExitoYcerrar(),
-        error: (err) => this.mostrarError(err)
+        next: () => {
+          this.mensajeExito = '¡Denuncia anónima enviada exitosamente!';
+          setTimeout(() => {
+            this.cerrarModal();
+            this.mensajeExito = '';
+          }, 2000);
+        },
+        error: (err) => {
+          console.error(err);
+          this.error = 'Error al enviar la denuncia. Intenta nuevamente.';
+          setTimeout(() => this.error = '', 9000);
+        }
       });
-  }
-
-  private validarCampos(): boolean {
-    return !!this.fecha &&
-      !!this.descripcion?.trim() &&
-      !!this.lugar?.trim();
-  }
-
-  private mostrarExitoYcerrar(): void {
-    this.mensajeExito = 'Denuncia registrada correctamente';
-    setTimeout(() => {
-      this.cerrarModal();
-      this.mensajeExito = '';
-    }, 100);
-  }
-
-  private mostrarError(err: any): void {
-    this.error = err?.message ||
-      err?.error?.message ||
-      'Error al enviar la denuncia. Por favor intente nuevamente.';
-    console.error('Error en denuncia:', err);
   }
 }

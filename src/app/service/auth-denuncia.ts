@@ -1,40 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Denuncia } from '../interface/denuncia';
-
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthDenuncia {
-  private API_FIREBASE = 'https://proyectoapp-b0489-default-rtdb.firebaseio.com';
+  private API_URL = 'http://localhost:8080/api/denuncias';
+
   constructor(private http: HttpClient) {}
 
-  guardarDenuncia(denuncia: Denuncia): Observable<any> {
-    return this.http.post(`${this.API_FIREBASE}/denuncias.json`, denuncia);
+  guardarDenuncia(denuncia: Denuncia): Observable<Denuncia> {
+    return this.http.post<Denuncia>(this.API_URL, denuncia);
   }
 
   obtenerDenuncias(): Observable<Denuncia[]> {
-    return this.http.get<Record<string, Denuncia>>(`${this.API_FIREBASE}/denuncias.json`)
-      .pipe(
-        map(obj => {
-          if (!obj) return [];
-          return Object.entries(obj).map(([id, data]) => ({ id, ...data }));
-        })
-      );
+    return this.http.get<Denuncia[]>(this.API_URL);
   }
 
   obtenerDenuncia(id: string): Observable<Denuncia> {
-    return this.http.get<Denuncia>(`${this.API_FIREBASE}/denuncias/${id}.json`);
+    return this.http.get<Denuncia>(`${this.API_URL}/${id}`);
   }
 
-  actualizarDenuncia(id: string, data: Partial<Denuncia>): Observable<any> {
-    return this.http.patch(`${this.API_FIREBASE}/denuncias/${id}.json`, data);
+  actualizarDenuncia(id: string, data: Partial<Denuncia>): Observable<Denuncia> {
+    return this.http.put<Denuncia>(`${this.API_URL}/${id}`, data);
   }
 
-  eliminarDenuncia(id: string): Observable<any> {
-    return this.http.delete(`${this.API_FIREBASE}/denuncias/${id}.json`);
+  eliminarDenuncia(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 }

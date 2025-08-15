@@ -2,40 +2,45 @@
   <h2>🚓 Historial de Denuncias</h2>
 
   <div class="denuncias-grid">
-    @for (denuncia of (denuncias$ | async); track denuncia.id) {
-      <div class="denuncia-card">
-        <div class="card-header">
-          <div class="card-id">DENUNCIA #{{ denuncia.id }}</div>
-        </div>
+    @if(cargando) {
+      <p>Cargando denuncias...</p>
+    } @else {
+      @if(error) {
+        <div class="error">{{ error }}</div>
+      } @else {
+        @for (denuncia of (denuncias$ | async); track denuncia.id) {
+          <div class="denuncia-card">
+            <div class="card-header">
+              <div class="card-id">DENUNCIA #{{ denuncia.id }}</div>
+            </div>
 
-        <div class="card-body">
-          <div class="denunciante">
-            <div class="denunciante-label">👤 Denunciante: {{ denuncia.nombre || 'No especificado' }}</div>
-            <br>
-            <div class="card-fecha">📅 Fecha Denuncia: {{ denuncia.fecha }}</div>
-            <br>
-            <div class="descripcion-label">📄 Descripción del Incidente:</div>
-          </div>
-          <br>
-          
+            <div class="card-body">
+              <div class="denunciante">
+                <div class="denunciante-label">👤 Denunciante: {{ denuncia.denunciante }}</div>
+                <br>
+                <div class="card-fecha">📅 Fecha Denuncia: {{ denuncia.fecha }}</div>
+                <br>
+                <div class="descripcion-label">📄 Descripción del Incidente:</div>
+              </div>
+              <br>
+              <div class="descripcion">
+                <div class="descripcion-texto">{{ denuncia.descripcion }}</div>
+              </div>
+            </div>
 
-          <div class="descripcion">
-            
-            <div class="descripcion-texto">{{ denuncia.descripcion }}</div>
+            <div class="card-footer">
+              <div class="estado-badge estado-{{ denuncia.estado?.toLowerCase()}}">
+                {{ denuncia.estado }}
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="card-footer">
-          <div class="estado-badge estado-{{ denuncia.estado.toLowerCase() }}">
-            {{ denuncia.estado }}
+        } @empty {
+          <div class="sin-denuncias">
+            <h3>No hay denuncias registradas</h3>
+            <p>Cuando se registren denuncias aparecerán aquí</p>
           </div>
-        </div>
-      </div>
-    } @empty {
-      <div class="sin-denuncias">
-        <h3>No hay denuncias registradas</h3>
-        <p>Cuando se registren denuncias aparecerán aquí</p>
-      </div>
+        }
+      }
     }
   </div>
 </div>

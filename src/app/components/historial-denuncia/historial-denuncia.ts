@@ -1,47 +1,85 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, OnDestroy, ChangeDetectorRef,ChangeDetectionStrategy} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-interface Denuncia {
-  id?: string;
-  nombre?: string;
-  descripcion: string;
-  fecha: string;
-  estado: string;
-}
+import { FormsModule } from '@angular/forms';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Denuncia } from '../../interface/denuncia';
+import { AuthDenuncia } from '../../service/auth-denuncia';
 
 @Component({
   selector: 'app-historial-denuncia',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './historial-denuncia.html',
   styleUrls: ['./historial-denuncia.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HistorialDenuncia {
-  private API_FIREBASE = 'https://proyectoapp-b0489-default-rtdb.firebaseio.com';
+export class HistorialDenuncia implements OnInit, OnDestroy {
   private denunciasSubject = new BehaviorSubject<Denuncia[]>([]);
   denuncias$ = this.denunciasSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.http.get<Record<string, any>>(`${this.API_FIREBASE}/denuncias.json`)
-      .pipe(
-        map(obj => {
-          if (!obj) return [];
-          return Object.entries(obj).map(([id, data]) => ({
-            id,
-            nombre: data.nombre || data.denunciante || 'No especificado',
-            descripcion: data.descripcion,
-            fecha: data.fecha,
-            estado: data.estado
-          }));
-        })
-      )
-      .subscribe({
-        next: data => this.denunciasSubject.next(data),
-        error: err => console.error('Error al cargar denuncias:', err)
-      });
+  cargando = false;
+  error = '';
+  private pollingSub?: Subscription;
+
+  constructor(private authDenuncia: AuthDenuncia, private cd: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.cargarDenuncias();
+    this.iniciarPolling();
+  }
+
+  ngOnDestroy(): void {
+    this.pollingSub?.unsubscribe();
+  }
+
+  cargarDenuncias(): void {
+    this.cargando = true;
+    this.error = '';
+
+    const usuarioNombre = localStorage.getItem('usuarioNombre');
+    if (!usuarioNombre || usuarioNombre.trim() === '') {
+      this.error = 'Usuario no autenticado';
+      this.denunciasSubject.next([]);
+      this.cargando = false;
+      this.cd.markForCheck();
+      return;
+    }
+
+    this.authDenuncia.obtenerDenuncias().subscribe({
+      next: (data) => {
+        // Filtrar denuncias para que solo se muestren las del usuario logueado
+        const filtradas = data.filter(d => d.denunciante === usuarioNombre);
+        this.denunciasSubject.next(filtradas);
+        this.cargando = false;
+        this.cd.markForCheck();
+      },
+      error: (err) => {
+        this.error = 'Error al cargar denuncias.';
+        console.error(err);
+        this.cargando = false;
+        this.cd.markForCheck();
+      }
+    });
+  }
+
+  private iniciarPolling(): void {
+    this.pollingSub = interval(5000).pipe(
+      switchMap(() => this.authDenuncia.obtenerDenuncias())
+    ).subscribe({
+      next: (data) => {
+        const usuarioNombre = localStorage.getItem('usuarioNombre');
+        if (usuarioNombre && usuarioNombre.trim() !== '') {
+          const filtradas = data.filter(d => d.denunciante === usuarioNombre);
+          this.denunciasSubject.next(filtradas);
+        } else {
+          this.denunciasSubject.next([]);
+        }
+        this.cd.markForCheck();
+      },
+      error: (err) => {
+        console.error('Error en actualización automática:', err);
+      }
+    });
   }
 }
