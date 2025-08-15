@@ -48,7 +48,6 @@ export class HistorialDenuncia implements OnInit, OnDestroy {
 
     this.authDenuncia.obtenerDenuncias().subscribe({
       next: (data) => {
-        // Filtrar denuncias para que solo se muestren las del usuario logueado
         const filtradas = data.filter(d => d.denunciante === usuarioNombre);
         this.denunciasSubject.next(filtradas);
         this.cargando = false;

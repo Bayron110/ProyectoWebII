@@ -27,11 +27,7 @@ export class VistaAdmin implements OnInit {
   error = '';
   mostrandoPanicos = false; 
 
-  constructor(
-    private authDenuncia: AuthDenuncia,
-    private authPanico: AuthPanico,
-    private cd: ChangeDetectorRef
-  ) {}
+  constructor(private authDenuncia: AuthDenuncia, private authPanico: AuthPanico, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.cargarDenuncias();
