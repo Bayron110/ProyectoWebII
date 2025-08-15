@@ -25,7 +25,7 @@ export class RegistroDenuncia {
   cargando = false;
 
   constructor(private authDenuncia: AuthDenuncia, private cd: ChangeDetectorRef) {
-    const usuarioNombre = localStorage.getItem('usuarioNombre'); // Cambia esta clave si usas otra
+    const usuarioNombre = localStorage.getItem('usuarioNombre'); 
     if (usuarioNombre) {
       this.denunciante = usuarioNombre;
     }

@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 
 import { Usuario } from '../../interface/usuario';
 import { RegistroService } from '../../service/registro';
+import { Router, RouterLink } from '@angular/router';
 
 interface FlipCard {
   title: string;
@@ -68,7 +69,7 @@ export class FormularioRegistro {
   modalType: 'success' | 'error' = 'success';
   loading = false;
 
-  constructor(private usuarioServicio: RegistroService) {}
+  constructor(private usuarioServicio: RegistroService, private router:Router) {}
 
   toggleFlip(card: FlipCard) {
     card.flipped = !card.flipped;
@@ -99,8 +100,10 @@ export class FormularioRegistro {
           this.modalTitle = 'Éxito';
           this.modalMessage = 'El usuario se guardó correctamente.';
           this.showModal = true;
+          this.router.navigate(['/login']);
           formulario.resetForm();
           setTimeout(() => this.closeModal(), 30000);
+          
         },
         error: (err) => {
           console.error('Error al guardar usuario', err);
